@@ -42,3 +42,10 @@ $> symfony composer test
 # Generate HTML Coverage report
 $> symfony composer phpunit-generate-coverage
 ```
+
+# Generate License List
+
+```
+$> symfony composer licenses
+$> npx license-checker --summary
+```
