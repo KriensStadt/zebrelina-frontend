@@ -1,0 +1,44 @@
+# 🦓 Zebrina Backend
+
+Start Database and Services
+
+```
+# Start services
+$> docker-compose up
+
+# Start asset watcher
+$> npm run watch
+
+# Run Server
+$> symfony serve
+```
+
+## Services
+
+* Postgres
+* pgadmin: [localhost:5050](localhost:5050)
+
+## Installation
+
+```
+$> docker-compose up --build
+
+# Install dependencies
+$> symfony composer install
+
+# Install frontend depdendencies
+$> npm install
+$> npm run build
+```
+
+# Test
+
+Run test suites
+
+```
+# Run all tests
+$> symfony composer test
+
+# Generate HTML Coverage report
+$> symfony composer phpunit-generate-coverage
+```
