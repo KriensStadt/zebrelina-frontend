@@ -20,6 +20,5 @@ return static function (ECSConfig $ecsConfig): void {
         // run and fix, one by one
         SetList::PSR_12,
         SetList::CLEAN_CODE,
-        SetList::DOCTRINE_ANNOTATIONS
     ]);
 };
