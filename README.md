@@ -1,4 +1,4 @@
-# 🦓 Zebrina Backend
+# 🦓 Zebrina Frontend
 
 Start Database and Services
 
