@@ -2,7 +2,7 @@ version: '3'
 
 services:
     database:
-        image: 'postgres:${POSTGRES_VERSION:-14}-alpine'
+        image: 'postgis/postgis:${POSTGRES_VERSION:-14}-3.3-alpine'
         environment:
             POSTGRES_DB: '${POSTGRES_DB:-zebrina_db}'
             POSTGRES_PASSWORD: '${POSTGRES_PASSWORD:-zebrina_password}'
