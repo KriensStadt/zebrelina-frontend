@@ -1,0 +1,8 @@
+{
+    "license": "proprietary",
+    "type": "project",
+    "php": ">=8.0",
+    "require": {
+        "andres-montanez/magallanes": "^4.1"
+    }
+}

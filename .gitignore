@@ -1,3 +1,8 @@
+.idea
+/docs/coverage
+/drivers/
+/.ecs_cache
+/tools/**/vendor
 
 ###> symfony/framework-bundle ###
 /.env.local
