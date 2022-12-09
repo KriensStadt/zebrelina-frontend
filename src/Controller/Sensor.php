@@ -27,12 +27,21 @@ class Sensor extends AbstractController
             throw $this->createNotFoundException(sprintf('Sensor "%s" not found', $sensor));
         }
 
-        $dataPoints = $this->database->executeQuery('SELECT * FROM metrics WHERE device_id = :sensor', [
+        $dataPoints = $this->database->executeQuery('
+            SELECT
+                time,
+                ST_X(location::geometry) AS long,
+                ST_Y(location::geometry) AS lat
+            FROM metrics
+            WHERE device_id = :sensor
+            ORDER BY time DESC
+        ', [
             'sensor' => $sensor,
-        ]);
+        ])->fetchAllAssociative();
 
         return $this->render('sensor.html.twig', [
             'sensor' => $sensor,
+            'dataPoints' => $dataPoints,
         ]);
     }
 }
