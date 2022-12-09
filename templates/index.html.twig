@@ -2,4 +2,12 @@
 
 {% block content %}
     <h1 class="font-bold">Zebrina</h1>
+
+    {% if sensors %}
+    <ul>
+        {% for sensor in sensors %}
+            <li><a href="{{ path('sensor', {sensor: sensor}) }}">{{ sensor }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
 {% endblock %}
