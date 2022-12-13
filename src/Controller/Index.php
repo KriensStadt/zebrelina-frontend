@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use Doctrine\DBAL\Connection;
+use App\Repository\DeviceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,16 +13,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class Index extends AbstractController
 {
     public function __construct(
-        private readonly Connection $database,
+        private readonly DeviceRepository $repository,
     ) {
     }
 
     public function __invoke(): Response
     {
-        $sensors = $this->database->executeQuery('SELECT DISTINCT device_id FROM metrics ORDER BY device_id')->fetchFirstColumn();
+        $devices = $this->repository->getDeviceIds();
 
         return $this->render('index.html.twig', [
-            'sensors' => $sensors,
+            'devices' => $devices,
         ]);
     }
 }
