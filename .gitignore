@@ -3,6 +3,7 @@
 /drivers/
 /.ecs_cache
 /tools/**/vendor
+.twig-cs-fixer.cache
 
 ###> symfony/framework-bundle ###
 /.env.local
