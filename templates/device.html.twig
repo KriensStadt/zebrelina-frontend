@@ -1,19 +1,19 @@
 {% extends 'layout/base.html.twig' %}
 
 {% block content %}
-    
+
     <div class="overflow-hidden rounded bg-white border mb-4">
         {# Header #}
         <div class="bg-gray-100 px-4 py-3 border-b">
             <h3 class="text-lg font-bold leading-6 text-gray-900">{{ 'device.title'|trans({'%device%': device}) }}</h3>
             <h3 class="text-xs text-gray-500">{{ 'device.subtitle'|trans }}</h3>
         </div>
-        
+
         {# Content #}
         <div>
             <div id="map" class="aspect-video h-96"></div>
         </div>
-        
+
         {# Footer #}
         <div class="bg-gray-100 px-4 py-2 border-t text-xs text-right">
             <a class="inline-flex justify-center rounded-md border border-transparent py-2 px-4 text-xs font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500" href="{{ path('index') }}">
