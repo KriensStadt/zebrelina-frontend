@@ -1,22 +1,26 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% if block('page_title') is defined %}{{ block('page_title') }} — Zebrina{% else %}Zebrina{% endif %}</title>
+<html class="h-full bg-gray-50" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% if block('page_title') is defined %}{{ block('page_title') }} — Zebrina{% else %}Zebrina{% endif %}</title>
 
-        <meta name="viewport" content="initial-scale=1, viewport-fit=cover" />
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='10 0 100 100'><text y='.90em' font-size='90'>🦓</text></svg>">
+    <meta name="viewport" content="initial-scale=1, viewport-fit=cover" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='10 0 100 100'><text y='.90em' font-size='90'>🦓</text></svg>">
 
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-        {% block content %}{% endblock %}
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+</head>
+<body class="h-full">
+    <div class="min-h-screen flex items-center justify-center">
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+    </div>
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-        <!-- 🦓 -->
-    </body>
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+    <!-- 🦓 -->
+</body>
 </html>
