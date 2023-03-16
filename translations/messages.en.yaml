@@ -6,3 +6,4 @@ device:
     title: '%device%'
     subtitle: 'Show map of this devices data'
     go_back: 'Back to Overview'
+    filter: 'Select date'

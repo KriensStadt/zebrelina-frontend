@@ -13,7 +13,7 @@ readonly class MetricRepository
     ) {
     }
 
-    public function findByDeviceId(string $id): array
+    public function findByDeviceId(string $id, \DateTimeInterface $date): array
     {
         $result = $this->database->executeQuery('
             SELECT
@@ -21,12 +21,31 @@ readonly class MetricRepository
                 ST_X(location::geometry) AS long,
                 ST_Y(location::geometry) AS lat
             FROM metrics
-            WHERE device_id = :device
+            WHERE
+                device_id = :device AND
+                DATE(time) = :date
             ORDER BY time DESC
+        ', [
+            'device' => $id,
+            'date' => $date->format('Y-m-d'),
+        ]);
+
+        return $result->fetchAllAssociative();
+    }
+
+    public function findDatesForDeviceId(string $id): array
+    {
+        $result = $this->database->executeQuery('
+            SELECT DISTINCT DATE(time) as date
+            FROM metrics
+            WHERE device_id = :device
+            ORDER BY date DESC
         ', [
             'device' => $id,
         ]);
 
-        return $result->fetchAllAssociative();
+        $results = $result->fetchFirstColumn();
+
+        return array_map(fn (string $date) => new \DateTimeImmutable($date), $results);
     }
 }

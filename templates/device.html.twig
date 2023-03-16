@@ -10,8 +10,20 @@
         </div>
 
         {# Content #}
-        <div>
+        <div class="flex divide-x divide-gray-200">
             <div id="map" class="aspect-video h-96"></div>
+            <aside>
+                <ul>
+                    <li class="px-2 py-1 text-xs border-gray-200 border-b font-medium bg-gray-100">
+                        {{ 'device.filter'|trans }}
+                    </li>
+                    {% for date in dates %}
+                        <li class="px-2 py-1 text-xs border-gray-200 border-b hover:bg-gray-100 {% if date == currentDate %}text-indigo-500 font-medium{% endif %}">
+                            <a href="{{ path('device', {device: device, dateString: date|date('Y-m-d')}) }}">{{ date|date('d.m.Y') }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </aside>
         </div>
 
         {# Footer #}
