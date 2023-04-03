@@ -29,6 +29,9 @@ $> symfony composer install
 # Install frontend depdendencies
 $> npm install
 $> npm run build
+
+# Import dump into the db container
+$> pv dump.pg | docker exec -i zebrina_database_1 psql -U zebrina_user zebrina_db
 ```
 
 # Test
