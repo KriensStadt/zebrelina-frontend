@@ -1,0 +1,42 @@
+{% extends 'layout_security.html.twig' %}
+
+{% block title %}{{ 'security.login.title'|trans }}{% endblock %}
+{% block subtitle %}{{ 'security.login.subtitle'|trans({})|raw }}{% endblock %}
+
+{% block card %}
+    {% if error %}
+        <div class="rounded-md bg-red-50 p-4 mb-3">
+            <div class="">
+                <h3 class="text-sm font-medium text-red-800">{{ 'security.error'|trans }}</h3>
+                <div class="mt-1 text-sm text-red-700">
+                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <form action="" method="post" autocomplete="off">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+        <div class="mb-3">
+            <label class="form-label" for="inputUsername">{{ 'login.username'|trans({}, 'forms') }}<span class="text-red-500">*</span></label>
+            <input type="text" value="{{ last_username }}" name="_username" id="inputUsername" class="form-input" placeholder="{{ 'login.username'|trans({}, 'forms') }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="inputPassword" class="form-label">{{ 'login.password'|trans({}, 'forms') }}<span class="text-red-500">*</span></label>
+            <input type="password" name="_password" id="inputPassword" class="form-input" placeholder="{{ 'login.password'|trans({}, 'forms') }}" required>
+        </div>
+
+        <div class="mb-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <input id="remember-me" name="_remember_me" type="checkbox" class="form-checkbox">
+                    <label for="remember-me" class="ml-2 block text-sm text-gray-900">{{ 'security.login.remember'|trans }}</label>
+                </div>
+            </div>
+        </div>
+
+        {{ component('button', {type: 'primary', label: 'security.login.submit'|trans, stretch: true}) }}
+    </form>
+{% endblock %}

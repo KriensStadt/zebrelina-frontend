@@ -7,3 +7,12 @@ device:
     subtitle: 'Show map of this devices data'
     go_back: 'Back to Overview'
     filter: 'Select date'
+
+security:
+    error: 'An error occured'
+
+    login:
+        title: 'Zebrina 🦓'
+        subtitle: 'Login to your admin account'
+        remember: 'Remember me'
+        submit: 'Login'
