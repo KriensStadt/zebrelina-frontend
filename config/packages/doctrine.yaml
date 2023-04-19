@@ -1,6 +1,10 @@
 doctrine:
     dbal:
-        url: '%env(resolve:DATABASE_URL)%'
+        connections:
+            default:
+                url: '%env(resolve:DATABASE_URL)%'
+            remote:
+                url: '%env(resolve:REMOTE_DATABASE_URL)%'
 
 when@test:
     doctrine:
