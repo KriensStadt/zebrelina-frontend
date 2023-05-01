@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[Route(path: '/admin/admin/{user}/delete', name: 'admin.admin.delete')]
+#[Route(path: '/admin/admin/{admin}/delete', name: 'admin.admin.delete')]
 #[IsGranted(AdminVoter::CAN_DELETE, ['user'])]
 class Delete extends AbstractController
 {
@@ -21,11 +21,11 @@ class Delete extends AbstractController
     ) {
     }
 
-    public function __invoke(Admin $user): Response
+    public function __invoke(Admin $admin): Response
     {
-        $this->addFlash('success', 'Removed user');
+        $this->addFlash('success', 'Removed admin');
 
-        $this->entityManager->remove($user);
+        $this->entityManager->remove($admin);
         $this->entityManager->flush();
 
         return $this->redirectToRoute('admin.admin.index');

@@ -16,12 +16,12 @@
                                 </div>
                                 <div class="shrink">
                                     {% if is_granted('admin_delete', admin) %}
-                                        <a href="{{ path('admin.admin.delete', {user: admin.id}) }}" class="text-xs font-medium text-red-500 ml-2">Delete</a>
+                                        <a href="{{ path('admin.admin.delete', {admin: admin.id}) }}" class="text-xs font-medium text-red-500 ml-2">Delete</a>
                                     {% else %}
                                         <span class="text-xs font-medium text-red-300 ml-2 cursor-not-allowed">Delete</span>
                                     {% endif %}
 
-                                    <a href="" class="text-xs font-medium text-indigo-500 ml-2">Edit</a>
+                                    <a href="{{ path('admin.admin.edit', {admin: admin.id}) }}" class="text-xs font-medium text-indigo-500 ml-2">Edit</a>
                                 </div>
                             </div>
                         </div>

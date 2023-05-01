@@ -11,3 +11,8 @@ group_login:
     username: 'Group Name'
     password: 'Password'
     time_period: 'Time period'
+
+admin:
+    username: 'Username'
+    password: 'Password'
+    repeat_password: 'Repeat password'

@@ -1,3 +1,6 @@
+global:
+    save: 'Save'
+
 index:
     title: 'Zebrina 🦓'
     subtitle: 'List of devices'
