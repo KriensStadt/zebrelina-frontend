@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route(path: '/admin/admin/{admin}/delete', name: 'admin.admin.delete')]
-#[IsGranted(AdminVoter::CAN_DELETE, ['user'])]
+#[IsGranted(AdminVoter::CAN_DELETE, 'admin')]
 class Delete extends AbstractController
 {
     public function __construct(

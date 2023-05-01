@@ -1,0 +1,21 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Create Admin{% endblock %}
+{% block subtitle %}Create a new Admin user{% endblock %}
+
+{% block content %}
+    {{ form_start(form) }}
+    {% component card %}
+        {% block card_body %}
+            {{ form_row(form.username) }}
+            {{ form_row(form.password) }}
+        {% endblock %}
+        
+        {% block card_footer %}
+            <div class="flex flex-col items-end">
+                {{ component('button', {type: 'primary', label: 'global.save'|trans}) }}
+            </div>
+        {% endblock %}
+    {% endcomponent %}
+    {{ form_end(form) }}
+{% endblock %}

@@ -29,3 +29,7 @@ security:
         title: 'Zebrina Groups 🦓'
         subtitle: 'Login to your group'
         submit: 'Login'
+
+admin:
+    index:
+        create_admin: 'Create Admin'

@@ -42,7 +42,7 @@ class AdminRepository extends ServiceEntityRepository implements PasswordUpgrade
     public function findAllForAdminOverview(): Paginator
     {
         $queryBuilder = $this->createQueryBuilder('u')
-            ->addOrderBy('u.username', 'DESC')
+            ->addOrderBy('u.username', 'ASC')
         ;
 
         return $this->paginatorFactory->create($queryBuilder);

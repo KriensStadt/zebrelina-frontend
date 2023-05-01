@@ -3,6 +3,10 @@
 {% block title %}Admin{% endblock %}
 {% block subtitle %}List of admin users{% endblock %}
 
+{% block buttons %}
+    {{ component('button', {type: 'primary', label: 'admin.index.create_admin', href: path('admin.admin.create') }) }}
+{% endblock %}
+
 {% block content %}
     {% component card %}
         {% block card_content %}
