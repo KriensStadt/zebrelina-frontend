@@ -1,0 +1,51 @@
+{% extends 'layout_empty.html.twig' %}
+
+{% block body %}
+<div class="min-h-screen flex flex-col">
+    <header class="shrink bg-white shadow">
+
+        <div class="mx-auto max-w-7xl py-4 px-2 sm:px-6 lg:px-8">
+            <div class="flex flex-row items-center">
+                <div class="text-3xl mr-4">🦓</div>
+
+                {% set menu = knp_menu_get('menu_admin') %}
+                {{ knp_menu_render(menu, {template: 'menu/navbar.html.twig'}) }}
+            </div>
+        </div>
+
+    </header>
+    <main class="grow">
+        <div class="mx-auto max-w-7xl py-4 px-2 sm:px-6 lg:px-8">
+            <div class="flex mb-2">
+                <div class="grow">
+                    {% if block('title') is defined %}
+                        <h1 class="text-3xl font-bold text-gray-800">{{ block('title') }}</h1>
+                    {% endif %}
+
+                    {% if block('subtitle') is defined %}
+                        <h2 class="text-xs text-gray-700 -mt-1">{{ block('subtitle') }}</h2>
+                    {% endif %}
+                </div>
+
+                <div class="shrink flex items-end">
+                    {% block buttons %}{% endblock %}
+                </div>
+            </div>
+
+            {% for message in app.flashes('success') %}
+                {{ component('info_panel', {type: 'success', text: message|trans({}, 'flashes')}) }}
+            {% endfor %}
+
+            <div class="text-sm">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </main>
+    <footer class="shrink">
+
+        <div class="mx-auto max-w-7xl py-1 px-2 sm:px-6 lg:px-8">
+            <div class="text-center text-xs text-gray-800">&copy; {{ 'today'|date('Y') }} StadtKriens</div>
+        </div>
+    </footer>
+</div>
+{% endblock %}

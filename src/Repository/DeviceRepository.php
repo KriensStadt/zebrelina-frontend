@@ -4,28 +4,20 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use Doctrine\DBAL\Connection;
+use App\Entity\Device;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
 
-readonly class DeviceRepository
+/**
+ * @method Device|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Device|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Device[]    findAll()
+ * @method Device[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ */
+class DeviceRepository extends ServiceEntityRepository
 {
-    public function __construct(
-        private Connection $database
-    ) {
-    }
-
-    public function getDeviceIds(): array
+    public function __construct(ManagerRegistry $registry)
     {
-        return $this->database
-            ->executeQuery('SELECT DISTINCT device_id FROM metrics ORDER BY device_id')
-            ->fetchFirstColumn();
-    }
-
-    public function deviceExists(string $id): bool
-    {
-        $deviceExists = $this->database->executeQuery('SELECT 1 FROM metrics WHERE device_id = :device LIMIT 1', [
-            'device' => $id,
-        ]);
-
-        return $deviceExists->fetchOne() !== false;
+        parent::__construct($registry, Device::class);
     }
 }

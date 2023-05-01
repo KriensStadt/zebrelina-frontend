@@ -1,0 +1,6 @@
+admin:
+    index: 'Dashboard'
+    admin: 'Admins'
+    device: 'Devices'
+    group: 'Groups'
+    time_period: 'Time Periods'

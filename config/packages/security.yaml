@@ -1,39 +1,103 @@
 security:
-    # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
-    # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
+
+    role_hierarchy:
+        ROLE_DEVICE: ROLE_USER
+        ROLE_DEVICE_GROUP: ROLE_USER
+        ROLE_ADMIN: ROLE_USER
+
     providers:
-        users_in_memory: { memory: null }
+        admin_user_provider:
+            entity:
+                class: App\Entity\Admin
+                property: username
+
+        device_user_provider:
+            entity:
+                class: App\Entity\Device
+                property: name
+
+        group_user_provider:
+            entity:
+                class: App\Entity\DeviceGroup
+                property: name
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        main:
-            lazy: true
-            provider: users_in_memory
 
-            # activate different ways to authenticate
-            # https://symfony.com/doc/current/security.html#the-firewall
+        device:
+            pattern: '^/device'
+            provider: device_user_provider
+            entry_point: form_login
 
-            # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
+            form_login:
+                login_path: device.login
+                check_path: device.login
 
-    # Easy way to control access for large sections of your site
-    # Note: Only the *first* access control that matches will be used
+            login_throttling:
+                max_attempts: 3
+                interval: '15 minutes'
+
+            logout:
+                path: device.logout
+                target: device.login
+
+        group:
+            pattern: '^/group'
+            provider: group_user_provider
+            entry_point: form_login
+
+            form_login:
+                login_path: group.login
+                check_path: group.login
+
+            login_throttling:
+                max_attempts: 3
+                interval: '15 minutes'
+
+            logout:
+                path: group.logout
+                target: group.login
+
+        admin:
+            pattern: '^/admin'
+            provider: admin_user_provider
+            entry_point: form_login
+
+            form_login:
+                login_path: admin.login
+                check_path: admin.login
+
+            login_throttling:
+                max_attempts: 3
+                interval: '15 minutes'
+
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800
+
+            logout:
+                path: admin.logout
+                target: admin.login
+
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        # Admin
+        - { path: ^/admin/login, roles: PUBLIC_ACCESS }
+        - { path: ^/admin, roles: ROLE_ADMIN }
 
+        - { path: ^/device/login, roles: PUBLIC_ACCESS }
+        - { path: ^/device, roles: ROLE_DEVICE }
+
+        - { path: ^/group/login, roles: PUBLIC_ACCESS }
+        - { path: ^/group, roles: ROLE_GROUP }
 when@test:
     security:
         password_hashers:
-            # By default, password hashers are resource intensive and take time. This is
-            # important to generate secure password hashes. In tests however, secure hashes
-            # are not important, waste resources and increase test times. The following
-            # reduces the work factor to the lowest possible values.
             Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
                 algorithm: auto
-                cost: 4 # Lowest possible value for bcrypt
-                time_cost: 3 # Lowest possible value for argon
-                memory_cost: 10 # Lowest possible value for argon
+                cost: 4
+                time_cost: 3
+                memory_cost: 10

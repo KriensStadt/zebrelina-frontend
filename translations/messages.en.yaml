@@ -1,3 +1,6 @@
+global:
+    save: 'Save'
+
 index:
     title: 'Zebrina 🦓'
     subtitle: 'List of devices'
@@ -7,3 +10,26 @@ device:
     subtitle: 'Show map of this devices data'
     go_back: 'Back to Overview'
     filter: 'Select date'
+
+security:
+    error: 'An error occured'
+
+    login_admin:
+        title: 'Zebrina Admin 🦓'
+        subtitle: 'Login to your admin account'
+        remember: 'Remember me'
+        submit: 'Login'
+
+    login_device:
+        title: 'Zebrina 🦓'
+        subtitle: 'Login to your device'
+        submit: 'Login'
+
+    login_group:
+        title: 'Zebrina Groups 🦓'
+        subtitle: 'Login to your group'
+        submit: 'Login'
+
+admin:
+    index:
+        create_admin: 'Create Admin'

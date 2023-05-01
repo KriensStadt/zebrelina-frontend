@@ -9,8 +9,24 @@ services:
             POSTGRES_DB: '${POSTGRES_DB:-zebrina_db}'
             POSTGRES_PASSWORD: '${POSTGRES_PASSWORD:-zebrina_password}'
             POSTGRES_USER: '${POSTGRES_USER:-zebrina_user}'
+        ports:
+            - '32780:5432'
         volumes:
             - 'db-data:/var/lib/postgresql/data:rw'
 
+    remote_database:
+        platform: 'linux/amd64'
+        container_name: zebrina_remote_database_1
+        image: 'postgis/postgis:${POSTGRES_VERSION:-14}-3.3-alpine'
+        environment:
+            POSTGRES_DB: '${POSTGRES_DB:-zebrina_db}'
+            POSTGRES_PASSWORD: '${POSTGRES_PASSWORD:-zebrina_password}'
+            POSTGRES_USER: '${POSTGRES_USER:-zebrina_user}'
+        ports:
+            - '32776:5432'
+        volumes:
+            - 'remote-db-data:/var/lib/postgresql/data:rw'
+
 volumes:
     db-data:
+    remote-db-data:

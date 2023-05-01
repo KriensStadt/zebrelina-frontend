@@ -1,0 +1,44 @@
+<div class="overflow-hidden rounded bg-white border mb-4">
+    {# Header #}
+    {% if block('card_title') is defined or block('card_subtitle') is defined %}
+        <div class="bg-gray-100 px-4 py-3 border-b">
+            {% if block('card_title') is defined %}
+                <h3 class="text-lg font-bold leading-6 text-gray-900">{{ block('card_title') }}</h3>
+            {% endif %}
+            {% if block('card_subtitle') is defined %}
+                <h3 class="text-xs text-gray-500">{{ block('card_subtitle') }}</h3>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    {# Content #}
+    {% block card_content %}
+        <div class="px-4 py-3">
+            {% block card_body %}{% endblock %}
+        </div>
+    {% endblock %}
+
+    {# Footer #}
+    {% if block('card_footer') is defined %}
+        <div class="bg-gray-100 px-4 py-2 border-t text-xs">
+            {{ block('card_footer') }}
+        </div>
+    {% endif %}
+</div>
+
+{#
+    Example:
+
+    {% component card %}
+        {% block card_title %}Title{% endblock %}
+        {% block card_subtitle %}Subtitle{% endblock %}
+
+        {% block card_body %}
+            hello
+        {% endblock %}
+
+        {% block card_footer %}
+            Ein Footer!
+        {% endblock %}
+    {% endcomponent %}
+#}

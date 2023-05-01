@@ -1,0 +1,13 @@
+services:
+    # Gedmo Extensions
+    Gedmo\Timestampable\TimestampableListener:
+        tags:
+            - { name: 'doctrine.event_subscriber', connection: 'default' }
+        calls:
+            - [ 'setAnnotationReader', [ '@annotation_reader' ] ]
+
+    Gedmo\Sluggable\SluggableListener:
+        tags:
+            - { name: 'doctrine.event_subscriber', connection: 'default' }
+        calls:
+            - [ 'setAnnotationReader', [ '@annotation_reader' ] ]

@@ -6,16 +6,16 @@ namespace App\Repository;
 
 use Doctrine\DBAL\Connection;
 
-readonly class MetricRepository
+readonly class RemoteMetricRepository
 {
     public function __construct(
-        private Connection $database
+        private Connection $remoteConnection
     ) {
     }
 
     public function findByDeviceId(string $id, \DateTimeInterface $date): array
     {
-        $result = $this->database->executeQuery('
+        $result = $this->remoteConnection->executeQuery('
             SELECT
                 time,
                 ST_X(location::geometry) AS long,
@@ -35,7 +35,7 @@ readonly class MetricRepository
 
     public function findDatesForDeviceId(string $id): array
     {
-        $result = $this->database->executeQuery('
+        $result = $this->remoteConnection->executeQuery('
             SELECT DISTINCT DATE(time) as date
             FROM metrics
             WHERE device_id = :device

@@ -1,0 +1,12 @@
+<nav class="flex flex-row space-x-4">
+    {% if matcher.isCurrent(item) or matcher.isAncestor(item) %}
+        {% for child in item.children %}
+            {% set isCurrent = matcher.isCurrent(child) or matcher.isAncestor(child) %}
+            {% set classes = isCurrent ? 'bg-gray-100' : 'bg-white' %}
+
+            <a class="text-gray-900 inline-flex items-center rounded-md py-2 px-3 text-sm font-medium hover:bg-gray-100 transition-all {{ classes }}" href="{{ child.uri }}">
+                {{ child.label|trans({}, 'menu') }}
+            </a>
+        {% endfor %}
+    {% endif %}
+</nav>

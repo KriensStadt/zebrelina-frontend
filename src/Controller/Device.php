@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Repository\DeviceRepository;
-use App\Repository\MetricRepository;
+use App\Repository\RemoteDeviceRepository;
+use App\Repository\RemoteMetricRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route(path: '/{device}/{dateString}', name: 'device', defaults: ['dateString' => null])]
+#[Route(path: '/asdf/{device}/{dateString}', name: 'device', defaults: ['dateString' => null])]
 class Device extends AbstractController
 {
     public function __construct(
-        private readonly DeviceRepository $deviceRepository,
-        private readonly MetricRepository $metricRepository,
+        private readonly RemoteDeviceRepository $deviceRepository,
+        private readonly RemoteMetricRepository $metricRepository,
     ) {
     }
 
