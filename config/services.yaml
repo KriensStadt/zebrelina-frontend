@@ -2,6 +2,7 @@ imports:
     - { resource: 'services/' }
 
 parameters:
+    paginator.entries_per_page: 25
 
 services:
     _defaults:

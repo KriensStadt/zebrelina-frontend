@@ -1,0 +1,37 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Admin{% endblock %}
+{% block subtitle %}List of admin users{% endblock %}
+
+{% block content %}
+    {% component card %}
+        {% block card_content %}
+            <ul role="list" class="divide-y divide-gray-200">
+                {% for admin in admins %}
+                    <li>
+                        <div class="block hover:bg-gray-50 px-4 py-2">
+                            <div class="flex items-center">
+                                <div class="grow flex items-center gap-2">
+                                    {{ admin.username }}
+                                </div>
+                                <div class="shrink">
+                                    {% if is_granted('admin_delete', admin) %}
+                                        <a href="{{ path('admin.admin.delete', {user: admin.id}) }}" class="text-xs font-medium text-red-500 ml-2">Delete</a>
+                                    {% else %}
+                                        <span class="text-xs font-medium text-red-300 ml-2 cursor-not-allowed">Delete</span>
+                                    {% endif %}
+
+                                    <a href="" class="text-xs font-medium text-indigo-500 ml-2">Edit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endblock %}
+        
+        {% block card_footer %}
+            {% include 'partials/pagination.html.twig' with {paginator: admins} %}
+        {% endblock %}
+    {% endcomponent %}
+{% endblock %}

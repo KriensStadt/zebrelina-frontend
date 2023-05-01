@@ -32,7 +32,11 @@
                 </div>
             </div>
 
-            <div class="bg-white rounded border p-3">
+            {% for message in app.flashes('success') %}
+                {{ component('info_panel', {type: 'success', text: message|trans({}, 'flashes')}) }}
+            {% endfor %}
+
+            <div class="text-sm">
                 {% block content %}{% endblock %}
             </div>
         </div>

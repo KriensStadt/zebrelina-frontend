@@ -1,0 +1,20 @@
+<nav class="flex items-center justify-between" aria-label="Pagination">
+    <p class="text-sm text-gray-700">
+        Showing
+        <span class="font-medium">{{ paginator.currentPageStart }}</span>
+        to
+        <span class="font-medium">{{ paginator.currentPageEnd }}</span>
+        of
+        <span class="font-medium">{{ paginator|length }}</span>
+        results
+    </p>
+    <div class="flex flex-1 justify-between sm:justify-end">
+        {% if paginator.hasPrevPage %}
+            <a href="?page={{ paginator.page - 1 }}" class="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0">Previous</a>
+        {% endif %}
+
+        {% if paginator.hasNextPage %}
+            <a href="?page={{ paginator.page + 1 }}" class="relative ml-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0">Next</a>
+        {% endif %}
+    </div>
+</nav>

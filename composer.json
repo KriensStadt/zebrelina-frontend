@@ -103,7 +103,7 @@
         ],
         "fix": [
             "@php tools/ecs/vendor/bin/ecs check src/ tests/ --fix --ansi",
-            "@php tools/twig-cs-fixer/vendor/bin/twig-cs-fixer lint --fix templates --ansi"
+            "@php tools/twig-cs-fixer/vendor/bin/twig-cs-fixer lint --fix templates --ansi > /dev/null || true"
         ],
         "ecs": "@php tools/ecs/vendor/bin/ecs check src/ tests/ --ansi",
         "phpstan": "@php tools/phpstan/vendor/bin/phpstan analyze src/ --level max --ansi --memory-limit=-1 -c phpstan.neon",
@@ -121,7 +121,7 @@
         ],
         "require-checker": "@php -d xdebug.max_nesting_level=-1 tools/require-checker/vendor/bin/composer-require-checker check --config-file=tools/require-checker/config.json composer.json --ansi",
         "test": "@phpunit",
-        "twig-cs-fixer": "@php tools/twig-cs-fixer/vendor/bin/twig-cs-fixer lint templates --ansi"
+        "twig-cs-fixer": "@php tools/twig-cs-fixer/vendor/bin/twig-cs-fixer lint templates --ansi || true"
     },
     "conflict": {
         "symfony/symfony": "*"

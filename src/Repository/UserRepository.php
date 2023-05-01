@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Entity\User;
+use App\Pagination\Paginator;
+use App\Pagination\PaginatorFactory;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -19,8 +21,10 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
  */
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
-    public function __construct(ManagerRegistry $registry)
-    {
+    public function __construct(
+        ManagerRegistry $registry,
+        private readonly PaginatorFactory $paginatorFactory,
+    ) {
         parent::__construct($registry, User::class);
     }
 
@@ -33,5 +37,14 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $user->setPassword($newHashedPassword);
         $this->_em->persist($user);
         $this->_em->flush();
+    }
+
+    public function findAllForAdminOverview(): Paginator
+    {
+        $queryBuilder = $this->createQueryBuilder('u')
+            ->addOrderBy('u.username', 'DESC')
+        ;
+
+        return $this->paginatorFactory->create($queryBuilder);
     }
 }
