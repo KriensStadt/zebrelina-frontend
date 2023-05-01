@@ -3,6 +3,10 @@
 {% block title %}Edit Admin{% endblock %}
 {% block subtitle %}Edit the admin user {{ admin.username }}{% endblock %}
 
+{% block buttons %}
+    {{ component('back_link', {href: path('admin.admin.index')}) }}
+{% endblock %}
+
 {% block content %}
     {{ form_start(form) }}
     {% component card %}
@@ -10,7 +14,7 @@
             {{ form_row(form.username) }}
             {{ form_row(form.password) }}
         {% endblock %}
-        
+
         {% block card_footer %}
             <div class="flex flex-col items-end">
                 {{ component('button', {type: 'primary', label: 'global.save'|trans}) }}

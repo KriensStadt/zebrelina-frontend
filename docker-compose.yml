@@ -2,7 +2,6 @@ version: '3'
 
 services:
     database:
-        platform: 'linux/amd64'
         container_name: zebrina_database_1
         image: 'postgis/postgis:${POSTGRES_VERSION:-14}-3.3-alpine'
         environment:
@@ -15,7 +14,6 @@ services:
             - 'db-data:/var/lib/postgresql/data:rw'
 
     remote_database:
-        platform: 'linux/amd64'
         container_name: zebrina_remote_database_1
         image: 'postgis/postgis:${POSTGRES_VERSION:-14}-3.3-alpine'
         environment:

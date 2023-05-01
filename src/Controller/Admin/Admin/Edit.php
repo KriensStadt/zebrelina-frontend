@@ -13,7 +13,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route(path: '/admin/admin/{admin}/edit', name: 'admin.admin.edit')]
+#[Route(
+    path: '/admin/admin/{admin}/edit',
+    name: 'admin.admin.edit',
+    defaults: [
+        '_menu' => 'admin.admin',
+    ]
+)]
 class Edit extends AbstractController
 {
     public function __construct(

@@ -8,8 +8,7 @@
             <div class="flex flex-row items-center">
                 <div class="text-3xl mr-4">🦓</div>
 
-                {% set menu = knp_menu_get('menu_admin') %}
-                {{ knp_menu_render(menu, {template: 'menu/navbar.html.twig'}) }}
+                {% block navigation %}{% endblock %}
             </div>
         </div>
 

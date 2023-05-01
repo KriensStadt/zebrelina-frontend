@@ -1,5 +1,6 @@
 global:
     save: 'Save'
+    back: 'Back'
 
 index:
     title: 'Zebrina 🦓'
