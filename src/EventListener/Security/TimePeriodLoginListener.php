@@ -34,7 +34,7 @@ class TimePeriodLoginListener
             return;
         }
 
-        $timePeriodName = $request->request->getAlpha('_time_period');
+        $timePeriodName = (string) $request->request->get('_time_period');
 
         if (!$timePeriodName) {
             throw new CustomUserMessageAuthenticationException('No time period password provided');

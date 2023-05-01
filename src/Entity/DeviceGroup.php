@@ -7,24 +7,25 @@ namespace App\Entity;
 use App\Database\Field\CreatedAt;
 use App\Database\Field\Id;
 use App\Database\Field\UpdatedAt;
-use App\Repository\UserRepository;
+use App\Repository\DeviceGroupRepository;
+use App\Security\NeedsTimePeriodOnLoginInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ORM\Table(name: 'users')]
-#[UniqueEntity('username')]
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+#[ORM\Entity(repositoryClass: DeviceGroupRepository::class)]
+#[ORM\Table(name: 'device_groups')]
+class DeviceGroup implements UserInterface, PasswordAuthenticatedUserInterface, NeedsTimePeriodOnLoginInterface
 {
     use Id;
     use CreatedAt;
     use UpdatedAt;
 
-    #[ORM\Column(type: Types::STRING, length: 180, unique: true)]
-    private ?string $username = null;
+    #[Assert\NotBlank]
+    #[ORM\Column(type: Types::STRING, length: 255)]
+    private ?string $name = null;
 
     #[ORM\Column(type: Types::JSON)]
     private array $roles = [];
@@ -32,21 +33,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::STRING)]
     private ?string $password = null;
 
-    public function getUserIdentifier(): string
+    public function getName(): ?string
     {
-        return (string) $this->username;
+        return $this->name;
     }
 
-    public function getUsername(): ?string
+    public function setName(string $name): self
     {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): self
-    {
-        $this->username = $username;
+        $this->name = $name;
 
         return $this;
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->name;
     }
 
     public function getRoles(): array
@@ -54,7 +55,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $roles = $this->roles;
 
         $roles[] = 'ROLE_USER';
-        $roles[] = 'ROLE_ADMIN';
+        $roles[] = 'ROLE_GROUP';
 
         return array_unique($roles);
     }

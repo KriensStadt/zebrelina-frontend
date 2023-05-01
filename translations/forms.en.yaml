@@ -6,3 +6,8 @@ device_login:
     username: 'Device Name'
     password: 'Password'
     time_period: 'Time period'
+
+group_login:
+    username: 'Group Name'
+    password: 'Password'
+    time_period: 'Time period'

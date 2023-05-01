@@ -21,3 +21,8 @@ security:
         title: 'Zebrina 🦓'
         subtitle: 'Login to your device'
         submit: 'Login'
+
+    login_group:
+        title: 'Zebrina Groups 🦓'
+        subtitle: 'Login to your group'
+        submit: 'Login'
