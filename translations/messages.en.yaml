@@ -1,6 +1,8 @@
 global:
     save: 'Save'
     back: 'Back'
+    prev: 'Previous'
+    next: 'Next'
 
 index:
     title: 'Zebrina 🦓'
@@ -34,3 +36,6 @@ security:
 admin:
     index:
         create_admin: 'Create Admin'
+
+    device:
+        create_device: 'Create device'

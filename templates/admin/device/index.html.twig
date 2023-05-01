@@ -1,0 +1,36 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Devices{% endblock %}
+{% block subtitle %}List of devices{% endblock %}
+
+{% block buttons %}
+    {{ component('button', {type: 'primary', label: 'admin.device.create_device'|trans, href: path('admin.device.create') }) }}
+{% endblock %}
+
+{% block content %}
+    {% component card %}
+        {% block card_content %}
+            <ul role="list" class="divide-y divide-gray-200">
+                {% for device in devices %}
+                    <li>
+                        <div class="block hover:bg-gray-50 px-4 py-2">
+                            <div class="flex items-center">
+                                <div class="grow flex items-center gap-2">
+                                    {{ device.name }}
+                                </div>
+                                <div class="shrink">
+                                    <a href="{{ path('admin.device.delete', {device: device.id}) }}" class="text-xs font-medium text-red-500 ml-2">Delete</a>
+                                    <a href="{{ path('admin.device.edit', {device: device.id}) }}" class="text-xs font-medium text-indigo-500 ml-2">Edit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endblock %}
+
+        {% block card_footer %}
+            {% include 'partials/pagination.html.twig' with {paginator: devices} %}
+        {% endblock %}
+    {% endcomponent %}
+{% endblock %}

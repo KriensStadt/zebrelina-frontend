@@ -16,3 +16,8 @@ admin:
     username: 'Username'
     password: 'Password'
     repeat_password: 'Repeat password'
+
+device:
+    name: 'Name'
+    password: 'Password'
+    repeat_password: 'Repeat password'
