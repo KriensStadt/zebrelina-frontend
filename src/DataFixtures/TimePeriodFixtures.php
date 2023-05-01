@@ -25,7 +25,9 @@ class TimePeriodFixtures extends Fixture
             $timePeriod = (new TimePeriod())
                 ->setPeriodStart($recurrence)
                 ->setPeriodEnd($to)
-                ->setName(uniqid());
+                ->setName(uniqid())
+                ->setActive(random_int(0, 1) > 0)
+            ;
 
             $manager->persist($timePeriod);
         }

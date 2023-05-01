@@ -26,3 +26,9 @@ device_group:
     name: 'Name'
     password: 'Password'
     repeat_password: 'Repeat password'
+
+time_period:
+    name: 'Name'
+    period_start: 'From'
+    period_end: 'To'
+    active: 'Active'

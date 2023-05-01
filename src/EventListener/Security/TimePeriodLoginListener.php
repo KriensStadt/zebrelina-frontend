@@ -40,7 +40,7 @@ class TimePeriodLoginListener
             throw new CustomUserMessageAuthenticationException('No time period password provided');
         }
 
-        $timePeriod = $this->timePeriodRepository->findOneByName($timePeriodName);
+        $timePeriod = $this->timePeriodRepository->findOneActiveByName($timePeriodName);
 
         if (!$timePeriod) {
             throw new CustomUserMessageAuthenticationException('Time period not found');

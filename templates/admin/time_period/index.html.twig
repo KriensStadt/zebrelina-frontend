@@ -1,0 +1,46 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Time Periods{% endblock %}
+{% block subtitle %}List of time periods{% endblock %}
+
+{% block buttons %}
+    {{ component('button', {type: 'primary', label: 'admin.time_period.create_time_period'|trans, href: path('admin.time_period.create') }) }}
+{% endblock %}
+
+{% block content %}
+    {% component card %}
+        {% block card_content %}
+            <ul role="list" class="divide-y divide-gray-200">
+                {% for timePeriod in timePeriods %}
+                    <li>
+                        <div class="block hover:bg-gray-50 px-4 py-2">
+                            <div class="flex items-center">
+                                <div class="grow flex items-center gap-2">
+
+                                    <span class="inline-flex items-center gap-x-1.5 rounded-full px-2 py-1 text-xs font-medium text-gray-500 ring-1 ring-inset ring-gray-200">
+                                        {# fill-red-500 fill-green-500 #}
+                                        <svg class="h-1.5 w-1.5 fill-{% if timePeriod.active %}green{% else %}red{% endif %}-500" viewBox="0 0 6 6" aria-hidden="true">
+                                            <circle cx="3" cy="3" r="3" />
+                                        </svg>
+
+                                        {{ timePeriod.periodStart|date('d.m.Y') }} - {{ timePeriod.periodEnd|date('d.m.Y') }}
+                                    </span>
+
+                                    {{ timePeriod.name }}
+                                </div>
+                                <div class="shrink">
+                                    <a href="{{ path('admin.time_period.delete', {timePeriod: timePeriod.id}) }}" class="text-xs font-medium text-red-500 ml-2">Delete</a>
+                                    <a href="{{ path('admin.time_period.edit', {timePeriod: timePeriod.id}) }}" class="text-xs font-medium text-indigo-500 ml-2">Edit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endblock %}
+
+        {% block card_footer %}
+            {% include 'partials/pagination.html.twig' with {paginator: timePeriods} %}
+        {% endblock %}
+    {% endcomponent %}
+{% endblock %}

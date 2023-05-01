@@ -1,0 +1,35 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Create Time Period{% endblock %}
+{% block subtitle %}Create a new time period{% endblock %}
+
+{% block buttons %}
+    {{ component('back_link', {href: path('admin.time_period.index')}) }}
+{% endblock %}
+
+{% block content %}
+    {{ form_start(form) }}
+    {% component card %}
+        {% block card_body %}
+            {{ form_row(form.name) }}
+
+            <div class="flex gap-4">
+                <div class="grow">
+                    {{ form_row(form.periodStart) }}
+                </div>
+                <div class="grow">
+                    {{ form_row(form.periodEnd) }}
+                </div>
+            </div>
+
+            {{ form_row(form.active) }}
+        {% endblock %}
+
+        {% block card_footer %}
+            <div class="flex flex-col items-end">
+                {{ component('button', {type: 'primary', label: 'global.save'|trans}) }}
+            </div>
+        {% endblock %}
+    {% endcomponent %}
+    {{ form_end(form) }}
+{% endblock %}
