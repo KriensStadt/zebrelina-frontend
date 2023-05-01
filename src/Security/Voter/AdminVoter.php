@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Security\Voter;
 
-use App\Entity\User;
+use App\Entity\Admin;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
@@ -14,7 +14,7 @@ class AdminVoter extends Voter
 
     protected function supports(string $attribute, mixed $subject): bool
     {
-        if (!$subject instanceof User) {
+        if (!$subject instanceof Admin) {
             return false;
         }
 
@@ -27,10 +27,10 @@ class AdminVoter extends Voter
 
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
-        /** @var User $admin */
+        /** @var Admin $admin */
         $admin = $subject;
 
-        /** @var User $user */
+        /** @var Admin $user */
         $user = $token->getUser();
 
         return match ($attribute) {
@@ -43,7 +43,7 @@ class AdminVoter extends Voter
     /**
      * A user can not delete itself.
      */
-    private function canDelete(User $admin, User $user): bool
+    private function canDelete(Admin $admin, Admin $user): bool
     {
         return $admin->getId() !== $user->getId();
     }

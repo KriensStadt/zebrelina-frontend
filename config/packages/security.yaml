@@ -10,7 +10,7 @@ security:
     providers:
         admin_user_provider:
             entity:
-                class: App\Entity\User
+                class: App\Entity\Admin
                 property: username
 
         device_user_provider:

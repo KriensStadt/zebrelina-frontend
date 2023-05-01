@@ -7,17 +7,17 @@ namespace App\Entity;
 use App\Database\Field\CreatedAt;
 use App\Database\Field\Id;
 use App\Database\Field\UpdatedAt;
-use App\Repository\UserRepository;
+use App\Repository\AdminRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-#[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ORM\Table(name: 'users')]
+#[ORM\Entity(repositoryClass: AdminRepository::class)]
+#[ORM\Table(name: 'admins')]
 #[UniqueEntity('username')]
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class Admin implements UserInterface, PasswordAuthenticatedUserInterface
 {
     use Id;
     use CreatedAt;

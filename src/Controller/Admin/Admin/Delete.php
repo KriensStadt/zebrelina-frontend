@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin\Admin;
 
-use App\Entity\User;
+use App\Entity\Admin;
 use App\Security\Voter\AdminVoter;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,7 +21,7 @@ class Delete extends AbstractController
     ) {
     }
 
-    public function __invoke(User $user): Response
+    public function __invoke(Admin $user): Response
     {
         $this->addFlash('success', 'Removed user');
 
