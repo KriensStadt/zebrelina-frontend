@@ -1,5 +1,7 @@
 {% extends 'layout.html.twig' %}
 
+{% block logout_link %}{{ path('admin.logout') }}{% endblock %}
+
 {% block navigation %}
     {% set menu = knp_menu_get('menu_admin') %}
     {{ knp_menu_render(menu, {template: 'menu/navbar.html.twig'}) }}

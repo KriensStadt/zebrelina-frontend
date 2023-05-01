@@ -3,6 +3,7 @@ global:
     back: 'Back'
     prev: 'Previous'
     next: 'Next'
+    logout: 'Logout'
 
 index:
     title: 'Zebrina 🦓'
