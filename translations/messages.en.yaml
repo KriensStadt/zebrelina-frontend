@@ -11,8 +11,13 @@ device:
 security:
     error: 'An error occured'
 
-    login:
-        title: 'Zebrina 🦓'
+    login_admin:
+        title: 'Zebrina Admin 🦓'
         subtitle: 'Login to your admin account'
         remember: 'Remember me'
+        submit: 'Login'
+
+    login_device:
+        title: 'Zebrina 🦓'
+        subtitle: 'Login to your device'
         submit: 'Login'

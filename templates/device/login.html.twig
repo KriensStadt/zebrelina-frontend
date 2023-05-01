@@ -1,0 +1,38 @@
+{% extends '/layout_security.html.twig' %}
+
+{% block title %}{{ 'security.login_device.title'|trans }}{% endblock %}
+{% block subtitle %}{{ 'security.login_device.subtitle'|trans({})|raw }}{% endblock %}
+
+{% block card %}
+    {% if error %}
+        <div class="rounded-md bg-red-50 p-4 mb-3">
+            <div class="">
+                <h3 class="text-sm font-medium text-red-800">{{ 'security.error'|trans }}</h3>
+                <div class="mt-1 text-sm text-red-700">
+                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <form action="" method="post" autocomplete="off">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+        <div class="mb-3">
+            <label class="form-label" for="inputUsername">{{ 'device_login.username'|trans({}, 'forms') }}<span class="text-red-500">*</span></label>
+            <input type="text" value="{{ last_username }}" name="_username" id="inputUsername" class="form-input" placeholder="{{ 'device_login.username'|trans({}, 'forms') }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="inputPassword" class="form-label">{{ 'device_login.password'|trans({}, 'forms') }}<span class="text-red-500">*</span></label>
+            <input type="password" name="_password" id="inputPassword" class="form-input" placeholder="{{ 'device_login.password'|trans({}, 'forms') }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="inputTimePeriod" class="form-label">{{ 'device_login.time_period'|trans({}, 'forms') }}<span class="text-red-500">*</span></label>
+            <input type="text" name="_time_period" id="inputTimePeriod" class="form-input" placeholder="{{ 'device_login.time_period'|trans({}, 'forms') }}" required>
+        </div>
+
+        {{ component('button', {type: 'primary', label: 'security.login_device.submit'|trans, stretch: true}) }}
+    </form>
+{% endblock %}
