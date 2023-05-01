@@ -17,6 +17,9 @@ class AdminType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        /** @var Admin $admin */
+        $admin = $options['data'];
+
         $builder
             ->add('username', TextType::class, [
                 'required' => true,
@@ -28,7 +31,7 @@ class AdminType extends AbstractType
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'mapped' => false,
-                'required' => false,
+                'required' => !$admin->getUsername(),
                 'constraints' => [
                     new Length(max: 256),
                 ],

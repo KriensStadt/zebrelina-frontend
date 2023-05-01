@@ -30,7 +30,7 @@ class Create extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var string|null $password */
+            /** @var string $password */
             $password = $form->get('password')->getData();
 
             $admin->setPassword($this->passwordHasher->hashPassword($admin, $password));
