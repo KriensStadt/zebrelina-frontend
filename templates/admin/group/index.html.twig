@@ -1,0 +1,36 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Groups{% endblock %}
+{% block subtitle %}List of groups{% endblock %}
+
+{% block buttons %}
+    {{ component('button', {type: 'primary', label: 'admin.group.create_group'|trans, href: path('admin.group.create') }) }}
+{% endblock %}
+
+{% block content %}
+    {% component card %}
+        {% block card_content %}
+            <ul role="list" class="divide-y divide-gray-200">
+                {% for group in groups %}
+                    <li>
+                        <div class="block hover:bg-gray-50 px-4 py-2">
+                            <div class="flex items-center">
+                                <div class="grow flex items-center gap-2">
+                                    {{ group.name }}
+                                </div>
+                                <div class="shrink">
+                                    <a href="{{ path('admin.group.delete', {group: group.id}) }}" class="text-xs font-medium text-red-500 ml-2">Delete</a>
+                                    <a href="{{ path('admin.group.edit', {group: group.id}) }}" class="text-xs font-medium text-indigo-500 ml-2">Edit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endblock %}
+
+        {% block card_footer %}
+            {% include 'partials/pagination.html.twig' with {paginator: groups} %}
+        {% endblock %}
+    {% endcomponent %}
+{% endblock %}

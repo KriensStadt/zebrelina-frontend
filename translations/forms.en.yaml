@@ -21,3 +21,8 @@ device:
     name: 'Name'
     password: 'Password'
     repeat_password: 'Repeat password'
+
+device_group:
+    name: 'Name'
+    password: 'Password'
+    repeat_password: 'Repeat password'

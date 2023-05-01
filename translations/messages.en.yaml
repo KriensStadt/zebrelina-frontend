@@ -39,3 +39,6 @@ admin:
 
     device:
         create_device: 'Create device'
+
+    group:
+        create_group: 'Create group'

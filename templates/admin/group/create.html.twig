@@ -1,0 +1,25 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Create Group{% endblock %}
+{% block subtitle %}Create a new group{% endblock %}
+
+{% block buttons %}
+    {{ component('back_link', {href: path('admin.group.index')}) }}
+{% endblock %}
+
+{% block content %}
+    {{ form_start(form) }}
+    {% component card %}
+        {% block card_body %}
+            {{ form_row(form.name) }}
+            {{ form_row(form.password) }}
+        {% endblock %}
+
+        {% block card_footer %}
+            <div class="flex flex-col items-end">
+                {{ component('button', {type: 'primary', label: 'global.save'|trans}) }}
+            </div>
+        {% endblock %}
+    {% endcomponent %}
+    {{ form_end(form) }}
+{% endblock %}

@@ -10,11 +10,11 @@
     </p>
     <div class="flex flex-1 justify-between sm:justify-end">
         {% if paginator.hasPrevPage %}
-            {{ component('button', {label: 'global.prev'|trans, href: '?page='~(paginator.page - 1)}) }}
+            {{ component('button', {label: 'global.prev'|trans, href: '?page=' ~ (paginator.page - 1)}) }}
         {% endif %}
 
         {% if paginator.hasNextPage %}
-            {{ component('button', {label: 'global.prev'|trans, href: '?page='~(paginator.page + 1)}) }}
+            {{ component('button', {label: 'global.prev'|trans, href: '?page=' ~ (paginator.page + 1)}) }}
         {% endif %}
     </div>
 </nav>
