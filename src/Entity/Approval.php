@@ -8,13 +8,13 @@ use App\Database\Field\CreatedAt;
 use App\Database\Field\Id;
 use App\Database\Field\UpdatedAt;
 use App\Model\ImportState;
-use App\Repository\DeviceRepository;
+use App\Repository\ApprovalRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: DeviceRepository::class)]
+#[ORM\Entity(repositoryClass: ApprovalRepository::class)]
 #[ORM\Table(name: 'approvals')]
 class Approval
 {

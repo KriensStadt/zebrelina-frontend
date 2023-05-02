@@ -8,6 +8,7 @@ use App\Entity\Approval;
 use App\Event\ApprovalChangeEvent;
 use App\Messenger\Message\ImportDataMessage;
 use App\Model\ImportState;
+use App\Repository\CommentRepository;
 use App\Repository\MetricRepository;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -18,6 +19,7 @@ class ApprovalChangeListener
     public function __construct(
         private readonly MessageBusInterface $messageBus,
         private readonly MetricRepository $metricRepository,
+        private readonly CommentRepository $commentRepository,
     ) {
     }
 
@@ -46,6 +48,14 @@ class ApprovalChangeListener
         $this->metricRepository->createQueryBuilder('m')
             ->delete()
             ->andWhere('m.approval = :approval')
+            ->setParameter('approval', $approval)
+            ->getQuery()
+            ->execute()
+        ;
+
+        $this->commentRepository->createQueryBuilder('c')
+            ->delete()
+            ->andWhere('c.approval = :approval')
             ->setParameter('approval', $approval)
             ->getQuery()
             ->execute()

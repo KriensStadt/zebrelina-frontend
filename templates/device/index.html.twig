@@ -87,15 +87,31 @@
             }
             
             const dP = [];
+            const cP = [];
 
             {% apply spaceless %}
                 {% if dataPoints|length %}
                     {% for dataPoint in dataPoints %}dP.push({point: [{{ dataPoint.latitude }}, {{ dataPoint.longitude }}], popup: '{{ dataPoint.created|date('d.m.Y H:i:s') }}'});{% endfor %}
                 {% endif %}
             {% endapply %}
+            
+            {% apply spaceless %}
+                {% if commentPoints|length %}
+                    {% for dataPoint in commentPoints %}cP.push({point: [{{ dataPoint.latitude }}, {{ dataPoint.longitude }}], popup: '{{ dataPoint.content }}'});{% endfor %}
+                {% endif %}
+            {% endapply %}
 
             const map = L.map('map').setView([51.505, -0.09], 13);
             let bounds = [];
+
+            const greenIcon = new L.Icon({
+                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+                shadowUrl: 'https://unpkg.com/leaflet@1.9.3/dist/images/marker-shadow.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowSize: [41, 41]
+            });
 
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 19,
@@ -106,6 +122,11 @@
                 L.marker(item.point).addTo(map).bindPopup(item.popup);
                 bounds.push(item.point);
             });
+            
+            cP.forEach((item) => {
+                L.marker(item.point, {icon: greenIcon}).addTo(map).bindPopup(item.popup);
+                // bounds.push(item.point);
+            });
 
             map.fitBounds(bounds);
             
@@ -115,7 +136,7 @@
                     map.removeLayer(existingMarker);
                 })
                 
-                const marker = L.marker(event.latlng);
+                const marker = L.marker(event.latlng,  {icon: greenIcon});
                 marker.addTo(map).bindPopup(document.getElementById('add-comment').innerHTML.replace('LAT', event.latlng.lat).replace('LNG', event.latlng.lng)).openPopup();
                 
                 customAttributionMarkers.push(marker);

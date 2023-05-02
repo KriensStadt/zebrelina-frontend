@@ -10,6 +10,7 @@ class DataPoint
         private readonly float $latitude,
         private readonly float $longitude,
         private readonly \DateTimeInterface $created,
+        private readonly ?string $content = null,
     ) {
     }
 
@@ -26,5 +27,10 @@ class DataPoint
     public function getCreated(): \DateTimeInterface
     {
         return $this->created;
+    }
+
+    public function getContent(): ?string
+    {
+        return $this->content;
     }
 }

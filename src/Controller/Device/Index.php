@@ -8,6 +8,7 @@ use App\Entity\Device;
 use App\Event\ApprovalChangeEvent;
 use App\Form\ApprovalType;
 use App\Repository\ApprovalRepository;
+use App\Repository\CommentRepository;
 use App\Repository\MetricRepository;
 use App\Service\TimePeriodProvider;
 use Doctrine\ORM\EntityManagerInterface;
@@ -26,6 +27,7 @@ class Index extends AbstractController
         private readonly EntityManagerInterface $entityManager,
         private readonly EventDispatcherInterface $eventDispatcher,
         private readonly MetricRepository $metricRepository,
+        private readonly CommentRepository $commentRepository,
     ) {
     }
 
@@ -56,6 +58,7 @@ class Index extends AbstractController
         $filterDate = $this->getFilterDate($date);
 
         $dataPoints = $this->metricRepository->findDataPointsForApproval($approval, $filterDate);
+        $commentPoints = $this->commentRepository->findDataPointsForApproval($approval);
 
         return $this->render('/device/index.html.twig', [
             'timePeriod' => $timePeriod,
@@ -63,6 +66,7 @@ class Index extends AbstractController
             'form' => $form,
             'dates' => $availableDates,
             'dataPoints' => $dataPoints,
+            'commentPoints' => $commentPoints,
             'filterDate' => $filterDate,
         ]);
     }
