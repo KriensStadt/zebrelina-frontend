@@ -10,12 +10,11 @@ use App\Form\ApprovalType;
 use App\Repository\ApprovalRepository;
 use App\Service\TimePeriodProvider;
 use Doctrine\ORM\EntityManagerInterface;
-use Psr\EventDispatcher\EventDispatcherInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 #[Route(path: '/device', name: 'device.index')]
 class Index extends AbstractController
@@ -24,7 +23,6 @@ class Index extends AbstractController
         private readonly TimePeriodProvider $timePeriodProvider,
         private readonly ApprovalRepository $approvalRepository,
         private readonly EntityManagerInterface $entityManager,
-        private readonly MessageBusInterface $messageBus,
         private readonly EventDispatcherInterface $eventDispatcher,
     ) {
     }
