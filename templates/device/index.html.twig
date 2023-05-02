@@ -9,13 +9,18 @@
         
         <div class="flex flex-col items-end mb-3">
             <div class="inline-flex rounded-md shadow-sm" data-filter>
-                <a href="{{ path('device.index') }}" class="relative inline-flex items-center rounded-l-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10">
-                    {% if filterDate %}
+                {% if filterDate %}
+                    <a href="{{ path('device.index') }}" class="relative inline-flex items-center rounded-l-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10">
+                        <svg viewBox="0 0 14 14" class="h-4 w-4 stroke-gray-700/50">
+                            <path d="M4 4l6 6m0-6l-6 6"></path>
+                        </svg>
                         {{ filterDate|date('d.m.Y') }}
-                    {% else %}
-                        {{ 'device.index.filter_by_date'|trans }}
-                    {% endif %}
-                </a>
+                    </a>
+                {% else %}
+                    <button class="relative inline-flex items-center rounded-l-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10">
+                            {{ 'device.index.filter_by_date'|trans }}
+                    </button>
+                {% endif %}
                 <div data-toggler class="relative -ml-px block">
                     <button type="button" class="relative inline-flex items-center rounded-r-md bg-white px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10" id="option-menu-button" aria-expanded="true" aria-haspopup="true">
                         <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -85,7 +90,7 @@
 
             {% apply spaceless %}
                 {% if dataPoints|length %}
-                    {% for dataPoint in dataPoints %}dP.push([{{ dataPoint.latitude }}, {{ dataPoint.longitude }}]);{% endfor %}
+                    {% for dataPoint in dataPoints %}dP.push({point: [{{ dataPoint.latitude }}, {{ dataPoint.longitude }}], popup: '{{ dataPoint.created|date('d.m.Y H:i:s') }}'});{% endfor %}
                 {% endif %}
             {% endapply %}
 
@@ -98,8 +103,8 @@
             }).addTo(map);
 
             dP.forEach((item) => {
-                L.marker(item).addTo(map);
-                bounds.push(item);
+                L.marker(item.point).addTo(map).bindPopup(item.popup);
+                bounds.push(item.point);
             });
 
             map.fitBounds(bounds);
