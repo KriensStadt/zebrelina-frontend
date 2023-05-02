@@ -40,6 +40,7 @@ class TimePeriodRepository extends ServiceEntityRepository
     public function findAllForAdminOverview(): Paginator
     {
         $queryBuilder = $this->createQueryBuilder('t')
+            ->addOrderBy('t.active', 'DESC')
             ->addOrderBy('t.periodStart', 'DESC')
         ;
 
