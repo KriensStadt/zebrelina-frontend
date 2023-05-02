@@ -27,7 +27,7 @@ class Comment
     private ?string $content = null;
 
     #[ORM\ManyToOne(targetEntity: CommentType::class, cascade: ['persist'])]
-    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private ?CommentType $commentType = null;
 
     #[ORM\ManyToOne(targetEntity: Approval::class, cascade: ['persist'], inversedBy: 'comments')]

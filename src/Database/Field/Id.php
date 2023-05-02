@@ -14,7 +14,7 @@ trait Id
     #[ORM\Column(type: 'uuid', unique: true)]
     #[ORM\GeneratedValue(strategy: 'CUSTOM')]
     #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
-    private ?Uuid $id;
+    private ?Uuid $id = null;
 
     public function getId(): ?Uuid
     {

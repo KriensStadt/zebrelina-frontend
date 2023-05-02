@@ -31,6 +31,7 @@ class CommentType extends AbstractType
                 },
                 'multiple' => false,
                 'expanded' => false,
+                'required' => false,
             ])
             ->add('content', TextareaType::class, [
                 'required' => true,
