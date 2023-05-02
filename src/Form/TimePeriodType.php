@@ -60,6 +60,11 @@ class TimePeriodType extends AbstractType
                 'required' => false,
                 'label' => 'time_period.active',
             ])
+            ->add('autoClose', CheckboxType::class, [
+                'required' => false,
+                'label' => 'time_period.auto_close',
+                'help' => 'time_period.auto_close_help',
+            ])
         ;
     }
 

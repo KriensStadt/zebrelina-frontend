@@ -124,7 +124,7 @@
         ],
         "require-checker": "@php -d xdebug.max_nesting_level=-1 tools/require-checker/vendor/bin/composer-require-checker check --config-file=tools/require-checker/config.json composer.json --ansi",
         "test": "@phpunit",
-        "twig-cs-fixer": "@php tools/twig-cs-fixer/vendor/bin/twig-cs-fixer lint templates --ansi || true"
+        "twig-cs-fixer": "@php tools/twig-cs-fixer/vendor/bin/twig-cs-fixer lint templates --ansi > /dev/null || true"
     },
     "conflict": {
         "symfony/symfony": "*"

@@ -33,6 +33,9 @@ class TimePeriod
     #[ORM\Column(type: Types::BOOLEAN)]
     private bool $active = true;
 
+    #[ORM\Column(type: Types::BOOLEAN)]
+    private bool $autoClose = true;
+
     public function getName(): ?string
     {
         return $this->name;
@@ -77,6 +80,18 @@ class TimePeriod
     public function setActive(bool $active): self
     {
         $this->active = $active;
+
+        return $this;
+    }
+
+    public function isAutoClose(): bool
+    {
+        return $this->autoClose;
+    }
+
+    public function setAutoClose(bool $autoClose): self
+    {
+        $this->autoClose = $autoClose;
 
         return $this;
     }

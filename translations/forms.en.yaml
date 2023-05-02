@@ -32,3 +32,5 @@ time_period:
     period_start: 'From'
     period_end: 'To'
     active: 'Active'
+    auto_close: 'Auto Close'
+    auto_close_help: 'Automatically disable this time period when the period ends'

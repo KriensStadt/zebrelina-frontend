@@ -12,7 +12,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-#[AsCommand(name: 'zebrina:test:database-connections')]
+#[AsCommand(name: 'zebrina:test-database-connection')]
 class TestDatabaseConnection extends Command
 {
     public function __construct(

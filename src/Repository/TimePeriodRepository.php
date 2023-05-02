@@ -46,4 +46,21 @@ class TimePeriodRepository extends ServiceEntityRepository
 
         return $this->paginatorFactory->create($queryBuilder);
     }
+
+    /**
+     * @return array<TimePeriod>
+     */
+    public function findAutoClosable(\DateTimeInterface $now): array
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.active = true')
+            ->andWhere('t.autoClose = true')
+            ->andWhere('t.periodEnd < :now')
+
+            ->setParameter('now', $now)
+
+            ->getQuery()
+            ->execute()
+        ;
+    }
 }

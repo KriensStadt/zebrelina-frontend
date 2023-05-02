@@ -27,6 +27,7 @@ class TimePeriodFixtures extends Fixture
                 ->setPeriodEnd($to)
                 ->setName(uniqid())
                 ->setActive(random_int(0, 1) > 0)
+                ->setAutoClose(random_int(0, 1) > 0)
             ;
 
             $manager->persist($timePeriod);
