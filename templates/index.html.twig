@@ -1,34 +1,21 @@
-{% extends 'layout/base.html.twig' %}
+{% extends 'layout_empty.html.twig' %}
 
-{% block content %}
-    <div class="overflow-hidden rounded bg-white border mb-4">
-        {# Header #}
-        <div class="bg-gray-100 px-4 py-3 border-b">
-            <h3 class="text-lg font-bold leading-6 text-gray-900">{{ 'index.title'|trans }}</h3>
-            <h3 class="text-xs text-gray-500">{{ 'index.subtitle'|trans }}</h3>
-        </div>
-
-        {# Content #}
-        <ul role="list" class="divide-y divide-gray-200">
-            {% for device in devices %}
-                <li>
-                    <a class="block hover:bg-gray-50" href="{{ path('device', {device: device}) }}">
-                        <div class="flex items-center pl-4 pr-3 py-3">
-                            <div class="flex flex-1 items-center mr-4">
-                                <p class="text-sm font-medium text-gray-600">{{ device }}</p>
-                            </div>
-                            <div class="flex items-center">
-                                <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                    <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-            {% endfor %}
-        </ul>
-
-        {# Footer #}
-        <div class="bg-gray-100 px-4 py-1 border-t text-xs"></div>
+{% block body %}
+    <div class="min-h-screen flex flex-col">
+        <main class="grow flex items-center justify-center">
+            <div class="flex flex-col">
+                <div class="text-center text-3xl font-bold mb-3">{{ 'index.title'|trans }}</div>
+                <div>
+                    {{ component('button', {label: 'index.goto_admin'|trans, href: path('admin.index'), type: 'primary'}) }}
+                    {{ component('button', {label: 'index.goto_device'|trans, href: path('device.index'), type: 'default'}) }}
+                    {{ component('button', {label: 'index.goto_group'|trans, href: path('group.index'), type: 'default'}) }}
+                </div>
+            </div>
+        </main>
+        <footer class="shrink">
+            <div class="mx-auto max-w-7xl py-1 px-2 sm:px-6 lg:px-8">
+                <div class="text-center text-xs text-gray-800">&copy; {{ 'today'|date('Y') }} StadtKriens</div>
+            </div>
+        </footer>
     </div>
 {% endblock %}

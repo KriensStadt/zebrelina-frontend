@@ -7,7 +7,9 @@ global:
 
 index:
     title: 'Zebrina 🦓'
-    subtitle: 'List of devices'
+    goto_admin: 'Administration'
+    goto_device: 'Device'
+    goto_group: 'Group'
 
 device:
     title: '%device%'
