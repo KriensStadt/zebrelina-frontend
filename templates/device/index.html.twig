@@ -5,6 +5,10 @@
         {{ component('info_panel', {type: 'warning', text: 'device.currently_importing.text'|trans}) }}
     {% endif %}
     
+    {% if approval.importState == constant('App\\Model\\ImportState::Ready') %}
+        hello there!
+    {% endif %}
+    
     {% if not approval.approved %}
         {{ component('info_panel', {title: 'device.approval_info.title'|trans, text: 'device.approval_info.text'|trans}) }}
     {% endif %}

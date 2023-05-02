@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Controller\Device;
 
 use App\Entity\Device;
+use App\Event\ApprovalChangeEvent;
 use App\Form\ApprovalType;
-use App\Messenger\Message\ImportDataMessage;
-use App\Model\ImportState;
 use App\Repository\ApprovalRepository;
 use App\Service\TimePeriodProvider;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,6 +25,7 @@ class Index extends AbstractController
         private readonly ApprovalRepository $approvalRepository,
         private readonly EntityManagerInterface $entityManager,
         private readonly MessageBusInterface $messageBus,
+        private readonly EventDispatcherInterface $eventDispatcher,
     ) {
     }
 
@@ -43,14 +44,7 @@ class Index extends AbstractController
             $this->entityManager->persist($approval);
             $this->entityManager->flush();
 
-            if ($approval->isApproved()) {
-                $approval->setImportState(ImportState::Importing);
-
-                $this->messageBus->dispatch(new ImportDataMessage($approval));
-            } else {
-                $approval->setImportState(ImportState::NotImported);
-                $approval->setLastImported(null);
-            }
+            $this->eventDispatcher->dispatch(new ApprovalChangeEvent($approval));
 
             $this->entityManager->persist($approval);
             $this->entityManager->flush();
