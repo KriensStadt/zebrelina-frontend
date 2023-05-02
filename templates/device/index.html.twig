@@ -108,8 +108,30 @@
             });
 
             map.fitBounds(bounds);
+            
+            const customAttributionMarkers = [];
+            map.on('click', (event) => {
+                customAttributionMarkers.forEach((existingMarker) => {
+                    map.removeLayer(existingMarker);
+                })
+                
+                const marker = L.marker(event.latlng);
+                marker.addTo(map).bindPopup(document.getElementById('add-comment').innerHTML.replace('LAT', event.latlng.lat).replace('LNG', event.latlng.lng)).openPopup();
+                
+                customAttributionMarkers.push(marker);
+            });
         })();
     </script>
+    
+    <style>
+        .leaflet-container a.text-white {
+            color: white;
+        }
+    </style>
+    
+    <template id="add-comment">
+        {{ component('button', {type: 'primary', label: 'device.index.add_comment'|trans, href: path('device.add_comment', {lat: 'LAT', lng: 'LNG'})}) }}
+    </template>
     
     {{ parent() }}
 {% endblock %}

@@ -40,3 +40,7 @@ time_period:
     active: 'Active'
     auto_close: 'Auto Close'
     auto_close_help: 'Automatically disable this time period when the period ends'
+
+comment:
+    content: 'Content'
+    content_help: 'Add a beautiful description how to best use this field'

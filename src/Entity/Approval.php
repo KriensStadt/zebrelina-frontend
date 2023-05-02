@@ -42,9 +42,13 @@ class Approval
     #[ORM\OneToMany(mappedBy: 'approval', targetEntity: Metric::class, cascade: ['remove'])]
     private Collection $metrics;
 
+    #[ORM\OneToMany(mappedBy: 'approval', targetEntity: Comment::class, cascade: ['remove'])]
+    private Collection $comments;
+
     public function __construct()
     {
         $this->metrics = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getTimePeriod(): ?TimePeriod
@@ -115,16 +119,37 @@ class Approval
 
         return $this;
     }
-    
+
     public function removeMetric(Metric $metric): self
     {
         $this->metrics->removeElement($metric);
-        
+
         return $this;
     }
-    
+
     public function getMetrics(): Collection
     {
         return $this->metrics;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        $this->comments->removeElement($comment);
+
+        return $this;
+    }
+
+    public function getComments(): Collection
+    {
+        return $this->comments;
     }
 }
