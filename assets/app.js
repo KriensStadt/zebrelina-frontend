@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const toggle = filter.querySelector('[data-toggle]');
 
-            toggle.hidden = !toggle.hidden;
+            toggle.hidden = true;
         });
     });
 

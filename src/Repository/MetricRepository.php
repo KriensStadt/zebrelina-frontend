@@ -125,6 +125,8 @@ class MetricRepository extends ServiceEntityRepository
             ->andWhere('a.approved = true')
             ->andWhere('g = :group')
 
+            ->addOrderBy('created', 'DESC')
+
             ->setParameter('timePeriod', $timePeriod)
             ->setParameter('group', $deviceGroup)
 
