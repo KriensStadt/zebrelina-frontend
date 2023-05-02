@@ -16,7 +16,7 @@ class RemoteDatabaseDataImporter implements DataImporterInterface
 
     public function import(string $deviceName, \DateTimeInterface $from, \DateTimeInterface $to): array
     {
-         $query = $this->remoteConnection->executeQuery('
+        $query = $this->remoteConnection->executeQuery('
             SELECT
                 time,
                 ST_X(location::geometry) AS lon,

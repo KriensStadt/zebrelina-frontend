@@ -12,27 +12,18 @@ class TimePeriodFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $start = new \DateTimeImmutable('last monday');
-        $end = new \DateTimeImmutable('last monday + 1 year');
+        $start = new \DateTimeImmutable('2022-06-23');
+        $end = new \DateTimeImmutable('2022-07-01');
 
-        $interval = new \DateInterval('P7D');
-        $period = new \DatePeriod($start, $interval, $end);
+        $timePeriod = (new TimePeriod())
+            ->setPeriodStart($start)
+            ->setPeriodEnd($end)
+            ->setName('barry2')
+            ->setActive(true)
+            ->setAutoClose(false)
+        ;
 
-        foreach ($period as $recurrence) {
-            $to = \DateTimeImmutable::createFromInterface($recurrence);
-            $to = $to->add($interval);
-
-            $timePeriod = (new TimePeriod())
-                ->setPeriodStart($recurrence)
-                ->setPeriodEnd($to)
-                ->setName(uniqid())
-                ->setActive(random_int(0, 1) > 0)
-                ->setAutoClose(random_int(0, 1) > 0)
-            ;
-
-            $manager->persist($timePeriod);
-        }
-
+        $manager->persist($timePeriod);
         $manager->flush();
     }
 }

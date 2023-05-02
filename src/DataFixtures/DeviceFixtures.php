@@ -20,13 +20,15 @@ class DeviceFixtures extends Fixture
     {
         $names = ['barry2', 'barry3', 'barry4'];
 
-        foreach ($names as $name) {
+        foreach ($names as $i => $name) {
             $device = (new Device())
                 ->setName($name)
             ;
 
             $device->setPassword($this->passwordHasher->hashPassword($device, '1234'));
             $manager->persist($device);
+
+            $this->addReference('device_' . $i, $device);
         }
 
         $manager->flush();
