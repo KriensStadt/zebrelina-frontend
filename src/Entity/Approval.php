@@ -9,6 +9,8 @@ use App\Database\Field\Id;
 use App\Database\Field\UpdatedAt;
 use App\Model\ImportState;
 use App\Repository\DeviceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -36,6 +38,14 @@ class Approval
 
     #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE, nullable: true)]
     private ?\DateTimeInterface $lastImported = null;
+
+    #[ORM\OneToMany(mappedBy: 'approval', targetEntity: Metric::class, cascade: ['remove'])]
+    private Collection $metrics;
+
+    public function __construct()
+    {
+        $this->metrics = new ArrayCollection();
+    }
 
     public function getTimePeriod(): ?TimePeriod
     {
@@ -95,5 +105,26 @@ class Approval
         $this->lastImported = $lastImported;
 
         return $this;
+    }
+
+    public function addMetric(Metric $metric): self
+    {
+        if (!$this->metrics->contains($metric)) {
+            $this->metrics->add($metric);
+        }
+
+        return $this;
+    }
+    
+    public function removeMetric(Metric $metric): self
+    {
+        $this->metrics->removeElement($metric);
+        
+        return $this;
+    }
+    
+    public function getMetrics(): Collection
+    {
+        return $this->metrics;
     }
 }

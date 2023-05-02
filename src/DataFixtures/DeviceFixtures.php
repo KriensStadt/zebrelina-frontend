@@ -18,13 +18,17 @@ class DeviceFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        $device = (new Device())
-            ->setName('Barry 2')
-        ;
+        $names = ['barry2', 'barry3', 'barry4'];
 
-        $device->setPassword($this->passwordHasher->hashPassword($device, '1234'));
+        foreach ($names as $name) {
+            $device = (new Device())
+                ->setName($name)
+            ;
 
-        $manager->persist($device);
+            $device->setPassword($this->passwordHasher->hashPassword($device, '1234'));
+            $manager->persist($device);
+        }
+
         $manager->flush();
     }
 }
