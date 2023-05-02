@@ -1,6 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {% block logout_link %}{{ path('admin.logout') }}{% endblock %}
+{% block logo_link %}{{ path('admin.index') }}{% endblock %}
 
 {% block navigation %}
     {% set menu = knp_menu_get('menu_admin') %}
