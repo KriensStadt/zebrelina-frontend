@@ -66,3 +66,6 @@ admin:
 
     time_period:
         create_time_period: 'Create time period'
+
+    comment_type:
+        create_comment_type: 'Create comment type'

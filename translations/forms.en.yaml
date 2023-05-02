@@ -44,3 +44,8 @@ time_period:
 comment:
     content: 'Content'
     content_help: 'Add a beautiful description how to best use this field'
+    comment_type: 'Type'
+    comment_type_help: 'Type help'
+
+comment_type:
+    name: 'Name'

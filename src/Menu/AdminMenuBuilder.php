@@ -44,6 +44,10 @@ class AdminMenuBuilder
             'route' => 'admin.time_period.index',
         ]);
 
+        $menu->addChild('admin.comment_type', [
+            'route' => 'admin.comment_type.index',
+        ]);
+
         return $menu;
     }
 }

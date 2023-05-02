@@ -1,0 +1,39 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Comment Types{% endblock %}
+{% block subtitle %}List of comment types{% endblock %}
+
+{% block buttons %}
+    {{ component('button', {type: 'primary', label: 'admin.comment_type.create_comment_type'|trans, href: path('admin.comment_type.create') }) }}
+{% endblock %}
+
+{% block content %}
+    
+    {% if commentTypes|length %}
+        {% component card %}
+            {% block card_content %}
+                <ul role="list" class="divide-y divide-gray-200">
+                    {% for commentType in commentTypes %}
+                        <li>
+                            <div class="block hover:bg-gray-50 px-4 py-2">
+                                <div class="flex items-center">
+                                    <div class="grow flex items-center gap-2">
+                                        {{ commentType.name }}
+                                    </div>
+                                    <div class="shrink">
+                                        <a href="{{ path('admin.comment_type.delete', {commentType: commentType.id}) }}" class="text-xs font-medium text-red-500 ml-2">Delete</a>
+                                        <a href="{{ path('admin.comment_type.edit', {commentType: commentType.id}) }}" class="text-xs font-medium text-indigo-500 ml-2">Edit</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endblock %}
+    
+            {% block card_footer %}
+                {% include 'partials/pagination.html.twig' with {paginator: commentTypes} %}
+            {% endblock %}
+        {% endcomponent %}
+    {% endif %}
+{% endblock %}

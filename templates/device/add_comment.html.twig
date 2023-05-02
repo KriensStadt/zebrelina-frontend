@@ -13,6 +13,7 @@
             {{ form_start(form) }}
             {% component card %}
                 {% block card_body %}
+                    {{ form_row(form.commentType) }}
                     {{ form_row(form.content) }}
                 {% endblock %}
                 

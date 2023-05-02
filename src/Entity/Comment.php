@@ -11,6 +11,7 @@ use App\Database\Field\UpdatedAt;
 use App\Repository\CommentRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 #[ORM\Table(name: 'comments')]
@@ -21,8 +22,13 @@ class Comment
     use UpdatedAt;
     use Point;
 
+    #[Assert\NotBlank]
     #[ORM\Column(type: Types::TEXT, nullable: false)]
     private ?string $content = null;
+
+    #[ORM\ManyToOne(targetEntity: CommentType::class, cascade: ['persist'])]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?CommentType $commentType = null;
 
     #[ORM\ManyToOne(targetEntity: Approval::class, cascade: ['persist'], inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: true)]
@@ -80,6 +86,18 @@ class Comment
     public function setDeviceGroup(DeviceGroup $deviceGroup): self
     {
         $this->deviceGroup = $deviceGroup;
+
+        return $this;
+    }
+
+    public function getCommentType(): ?CommentType
+    {
+        return $this->commentType;
+    }
+
+    public function setCommentType(CommentType $commentType): self
+    {
+        $this->commentType = $commentType;
 
         return $this;
     }

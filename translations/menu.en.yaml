@@ -4,3 +4,4 @@ admin:
     device: 'Devices'
     group: 'Groups'
     time_period: 'Time Periods'
+    comment_type: 'Comment Types'
