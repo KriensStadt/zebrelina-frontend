@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
-#[Route(path: '/device/{date}', name: 'device.index', defaults: ['date' => null])]
+#[Route(path: '/device/{date}', name: 'device.index', requirements: ['date' => '\d+-\d+-\d+'], defaults: ['date' => null])]
 class Index extends AbstractController
 {
     public function __construct(
