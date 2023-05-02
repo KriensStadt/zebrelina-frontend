@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 namespace App\Form;
 
+use App\Entity\Device;
 use App\Entity\DeviceGroup;
+use App\Repository\DeviceRepository;
+use Doctrine\ORM\QueryBuilder;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -47,6 +51,19 @@ class DeviceGroupType extends AbstractType
                         'placeholder' => 'device_group.repeat_password'
                     ],
                 ],
+            ])
+            ->add('devices', EntityType::class, [
+                'class' => Device::class,
+                'label' => 'device_group.devices',
+                'help' => 'device_group.devices_help',
+                'choice_label' => fn (Device $device) => $device->getName(),
+                'query_builder' => function (DeviceRepository $repository): QueryBuilder {
+                    return $repository->createQueryBuilder('d')
+                        ->addOrderBy('d.name', 'DESC')
+                    ;
+                },
+                'multiple' => true,
+                'expanded' => true,
             ])
         ;
     }

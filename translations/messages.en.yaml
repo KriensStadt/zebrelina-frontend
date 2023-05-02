@@ -43,6 +43,7 @@ admin:
 
     group:
         create_group: 'Create group'
+        number_of_devices: '{number} devices'
 
     time_period:
         create_time_period: 'Create time period'

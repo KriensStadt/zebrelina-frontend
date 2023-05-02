@@ -9,6 +9,8 @@ use App\Database\Field\Id;
 use App\Database\Field\UpdatedAt;
 use App\Repository\DeviceGroupRepository;
 use App\Security\NeedsTimePeriodOnLoginInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -35,6 +37,16 @@ class DeviceGroup implements UserInterface, PasswordAuthenticatedUserInterface, 
     #[ORM\Column(type: Types::STRING)]
     private ?string $password = null;
 
+    #[Assert\Count(min: 1)]
+    #[ORM\ManyToMany(targetEntity: Device::class, inversedBy: 'deviceGroups', cascade: ['persist'])]
+    #[ORM\JoinTable(name: 'map_device_group_device')]
+    private Collection $devices;
+
+    public function __construct()
+    {
+        $this->devices = new ArrayCollection();
+    }
+
     public function getName(): ?string
     {
         return $this->name;
@@ -45,6 +57,27 @@ class DeviceGroup implements UserInterface, PasswordAuthenticatedUserInterface, 
         $this->name = $name;
 
         return $this;
+    }
+
+    public function addDevice(Device $device): self
+    {
+        if (!$this->devices->contains($device)) {
+            $this->devices->add($device);
+        }
+
+        return $this;
+    }
+
+    public function removeDevice(Device $device): self
+    {
+        $this->devices->removeElement($device);
+
+        return $this;
+    }
+
+    public function getDevices(): Collection
+    {
+        return $this->devices;
     }
 
     public function getUserIdentifier(): string

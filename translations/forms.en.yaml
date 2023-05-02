@@ -26,6 +26,8 @@ device_group:
     name: 'Name'
     password: 'Password'
     repeat_password: 'Repeat password'
+    devices: 'Devices'
+    devices_help: 'Add at least one device to this group'
 
 time_period:
     name: 'Name'

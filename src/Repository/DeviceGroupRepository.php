@@ -28,6 +28,8 @@ class DeviceGroupRepository extends ServiceEntityRepository
     public function findAllForAdminOverview(): Paginator
     {
         $queryBuilder = $this->createQueryBuilder('g')
+            ->addSelect('d')
+            ->leftJoin('g.devices', 'd')
             ->addOrderBy('g.name', 'ASC')
         ;
 

@@ -16,7 +16,7 @@
                         <div class="block hover:bg-gray-50 px-4 py-2">
                             <div class="flex items-center">
                                 <div class="grow flex items-center gap-2">
-                                    {{ group.name }}
+                                    {{ group.name }} <span class="text-xs text-gray-500">({{ 'admin.group.number_of_devices'|trans({'{number}': group.devices|length}) }})</span>
                                 </div>
                                 <div class="shrink">
                                     <a href="{{ path('admin.group.delete', {group: group.id}) }}" class="text-xs font-medium text-red-500 ml-2">Delete</a>
