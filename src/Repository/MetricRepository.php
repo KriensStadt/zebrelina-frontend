@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Entity\Approval;
+use App\Entity\DeviceGroup;
 use App\Entity\Metric;
+use App\Entity\TimePeriod;
 use App\Model\DataPoint;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -52,6 +54,92 @@ class MetricRepository extends ServiceEntityRepository
             ->getArrayResult()
         ;
 
+        return $this->mapToDataPoints($result);
+    }
+
+    public function findDataPointsForGroupAndTimePeriod(DeviceGroup $deviceGroup, TimePeriod $timePeriod, ?\DateTimeInterface $date = null): array
+    {
+        $query = $this->createQueryBuilder('m')
+            ->select([
+                'm.created',
+                'ST_X(m.point) AS lon',
+                'ST_Y(m.point) AS lat'
+            ])
+
+            ->leftJoin('m.approval', 'a')
+            ->leftJoin('a.device', 'd')
+            ->leftJoin('d.deviceGroups', 'g')
+
+            ->andWhere('a.timePeriod = :timePeriod')
+            ->andWhere('a.approved = true')
+            ->andWhere('g = :group')
+
+            ->setParameter('timePeriod', $timePeriod)
+            ->setParameter('group', $deviceGroup)
+        ;
+
+        if (null !== $date) {
+            $query
+                ->andWhere('DATE(m.created) = DATE(:date)')
+                ->setParameter('date', $date)
+            ;
+        }
+
+        $result = $query
+            ->getQuery()
+            ->getArrayResult()
+        ;
+
+        return $this->mapToDataPoints($result);
+    }
+
+    public function findAvailableDatesForApproval(Approval $approval): array
+    {
+        if (!$approval->getId()) {
+            return [];
+        }
+
+        $results = $this->createQueryBuilder('m')
+            ->select('DISTINCT DATE(m.created) AS created')
+            ->andWhere('m.approval = :approval')
+            ->setParameter('approval', $approval)
+            ->addOrderBy('created', 'DESC')
+
+            ->getQuery()
+            ->execute()
+        ;
+
+        return array_map(fn (array $result) => new \DateTimeImmutable($result['created']), $results);
+    }
+
+    public function findAvailableDatesForGroupAndTimePeriod(DeviceGroup $deviceGroup, TimePeriod $timePeriod): array
+    {
+        $results = $this->createQueryBuilder('m')
+            ->select('DISTINCT DATE(m.created) AS created')
+
+            ->leftJoin('m.approval', 'a')
+            ->leftJoin('a.device', 'd')
+            ->leftJoin('d.deviceGroups', 'g')
+
+            ->andWhere('a.timePeriod = :timePeriod')
+            ->andWhere('a.approved = true')
+            ->andWhere('g = :group')
+
+            ->setParameter('timePeriod', $timePeriod)
+            ->setParameter('group', $deviceGroup)
+
+            ->getQuery()
+            ->execute()
+        ;
+
+        return array_map(fn (array $result) => new \DateTimeImmutable($result['created']), $results);
+    }
+
+    /**
+     * @return array<DataPoint>
+     */
+    private function mapToDataPoints(array $result): array
+    {
         return array_map(function (array $result): DataPoint {
             /** @var string $lat */
             $lat = $result['lat'];
@@ -68,25 +156,5 @@ class MetricRepository extends ServiceEntityRepository
                 created: $time
             );
         }, $result);
-    }
-
-    public function findAvailableDatesForApproval(Approval $approval): array
-    {
-        if (!$approval->getId()) {
-            return [];
-        }
-
-
-        $results = $this->createQueryBuilder('m')
-            ->select('DISTINCT DATE(m.created) AS created')
-            ->andWhere('m.approval = :approval')
-            ->setParameter('approval', $approval)
-            ->addOrderBy('created', 'DESC')
-
-            ->getQuery()
-            ->execute()
-        ;
-
-        return array_map(fn (array $result) => new \DateTimeImmutable($result['created']), $results);
     }
 }

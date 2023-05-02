@@ -25,8 +25,16 @@ class Comment
     private ?string $content = null;
 
     #[ORM\ManyToOne(targetEntity: Approval::class, cascade: ['persist'], inversedBy: 'comments')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Approval $approval = null;
+
+    #[ORM\ManyToOne(targetEntity: DeviceGroup::class, cascade: ['persist'])]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?DeviceGroup $deviceGroup = null;
+
+    #[ORM\ManyToOne(targetEntity: TimePeriod::class, cascade: ['persist'])]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?TimePeriod $timePeriod = null;
 
     public function getContent(): ?string
     {
@@ -48,6 +56,30 @@ class Comment
     public function setApproval(Approval $approval): self
     {
         $this->approval = $approval;
+
+        return $this;
+    }
+
+    public function getTimePeriod(): ?TimePeriod
+    {
+        return $this->timePeriod;
+    }
+
+    public function setTimePeriod(TimePeriod $timePeriod): self
+    {
+        $this->timePeriod = $timePeriod;
+
+        return $this;
+    }
+
+    public function getDeviceGroup(): ?DeviceGroup
+    {
+        return $this->deviceGroup;
+    }
+
+    public function setDeviceGroup(DeviceGroup $deviceGroup): self
+    {
+        $this->deviceGroup = $deviceGroup;
 
         return $this;
     }

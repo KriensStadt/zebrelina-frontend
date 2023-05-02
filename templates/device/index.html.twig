@@ -18,7 +18,7 @@
                     </a>
                 {% else %}
                     <button class="relative inline-flex items-center rounded-l-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10">
-                            {{ 'device.index.filter_by_date'|trans }}
+                        {{ 'device.index.filter_by_date'|trans }}
                     </button>
                 {% endif %}
                 <div data-toggler class="relative -ml-px block">
@@ -38,8 +38,7 @@
                 </div>
             </div>
         </div>
-        
-        
+
         {% component card %}
             {% block card_content %}
                 <div class="flex">

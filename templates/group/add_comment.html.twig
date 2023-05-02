@@ -1,10 +1,10 @@
-{% extends 'device/layout.html.twig' %}
+{% extends 'group/layout.html.twig' %}
 
 {% block title %}Create Comment{% endblock %}
-{% block subtitle %}Add a new comment{% endblock %}
+{% block subtitle %}Add a new group comment{% endblock %}
 
 {% block buttons %}
-    {{ component('back_link', {href: path('device.index')}) }}
+    {{ component('back_link', {href: path('group.index')}) }}
 {% endblock %}
 
 {% block content %}

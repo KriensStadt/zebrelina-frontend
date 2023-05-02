@@ -1,0 +1,14 @@
+{% extends 'layout.html.twig' %}
+
+{% block logout_link %}{{ path('group.logout') }}{% endblock %}
+{% block logo_link %}{{ path('group.index') }}{% endblock %}
+
+{% block navigation %}
+    <div>
+        <span class="font-bold text-xl mr-3">{{ app.user.name }}</span>
+
+        <span class="inline-flex items-center gap-x-1.5 rounded-full px-2 py-1 text-xs font-medium text-gray-500 ring-1 ring-inset ring-gray-200">
+            {{ timePeriod.periodStart|date('d.m.Y') }} - {{ timePeriod.periodEnd|date('d.m.Y') }}
+        </span>
+    </div>
+{% endblock %}

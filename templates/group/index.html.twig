@@ -1,1 +1,151 @@
-Time-Period: {{ app.session.get('time_period').id }}
+{% extends 'group/layout.html.twig' %}
+
+{% block content %}
+    <div class="flex flex-col items-end mb-3">
+        <div class="inline-flex rounded-md shadow-sm" data-filter>
+            {% if filterDate %}
+                <a href="{{ path('group.index') }}" class="relative inline-flex items-center rounded-l-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10">
+                    <svg viewBox="0 0 14 14" class="h-4 w-4 stroke-gray-700/50">
+                        <path d="M4 4l6 6m0-6l-6 6"></path>
+                    </svg>
+                    {{ filterDate|date('d.m.Y') }}
+                </a>
+            {% else %}
+                <button class="relative inline-flex items-center rounded-l-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10">
+                    {{ 'group.index.filter_by_date'|trans }}
+                </button>
+            {% endif %}
+            <div data-toggler class="relative -ml-px block">
+                <button type="button" class="relative inline-flex items-center rounded-r-md bg-white px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10" id="option-menu-button" aria-expanded="true" aria-haspopup="true">
+                    <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+                
+                <div data-toggle hidden class="z-[99999] absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="option-menu-button" tabindex="-1">
+                    <div class="py-1" role="none">
+                        {% for date in dates %}
+                            <a href="{{ path('group.index', {date: date|date('Y-m-d')}) }}" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900" role="menuitem" tabindex="-1" id="option-menu-item-0">{{ date|date('d.m.Y') }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {% component card %}
+        {% block card_content %}
+            <div class="flex">
+                <div id="map" class="aspect-video w-full"></div>
+            </div>
+        {% endblock %}
+    {% endcomponent %}
+{% endblock %}
+
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="">
+    
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+    
+    <script>
+        (function () {
+            if (!document.getElementById('map')) {
+                return;
+            }
+
+            const dP = [];
+            const cP = [];
+            const gP = [];
+            
+            {% apply spaceless %}
+            {% if dataPoints|length %}
+            {% for dataPoint in dataPoints %}dP.push({point: [{{ dataPoint.latitude }}, {{ dataPoint.longitude }}], popup: '{{ dataPoint.created|date('d.m.Y H:i:s') }}'});{% endfor %}
+            {% endif %}
+            {% endapply %}
+            
+            {% apply spaceless %}
+            {% if commentPoints|length %}
+            {% for dataPoint in commentPoints %}cP.push({point: [{{ dataPoint.latitude }}, {{ dataPoint.longitude }}], popup: '{{ dataPoint.content }}'});{% endfor %}
+            {% endif %}
+            {% endapply %}
+            
+            {% apply spaceless %}
+            {% if groupCommentPoints|length %}
+            {% for dataPoint in groupCommentPoints %}gP.push({point: [{{ dataPoint.latitude }}, {{ dataPoint.longitude }}], popup: '{{ dataPoint.content }}'});{% endfor %}
+            {% endif %}
+            {% endapply %}
+
+            const map = L.map('map').setView([51.505, -0.09], 13);
+            let bounds = [];
+
+            const greenIcon = new L.Icon({
+                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+                shadowUrl: 'https://unpkg.com/leaflet@1.9.3/dist/images/marker-shadow.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowSize: [41, 41]
+            });
+
+            const violetIcon = new L.Icon({
+                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
+                shadowUrl: 'https://unpkg.com/leaflet@1.9.3/dist/images/marker-shadow.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowSize: [41, 41]
+            });
+
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+
+            dP.forEach((item) => {
+                L.marker(item.point).addTo(map).bindPopup(item.popup);
+                bounds.push(item.point);
+            });
+
+            cP.forEach((item) => {
+                L.marker(item.point, {icon: greenIcon}).addTo(map).bindPopup(item.popup);
+                // bounds.push(item.point);
+            });
+
+            gP.forEach((item) => {
+                L.marker(item.point, {icon: violetIcon}).addTo(map).bindPopup(item.popup);
+                // bounds.push(item.point);
+            });
+
+            map.fitBounds(bounds);
+
+            const customAttributionMarkers = [];
+            map.on('click', (event) => {
+                customAttributionMarkers.forEach((existingMarker) => {
+                    map.removeLayer(existingMarker);
+                })
+
+                const marker = L.marker(event.latlng,  {icon: violetIcon});
+                marker.addTo(map).bindPopup(document.getElementById('add-comment').innerHTML.replace('LAT', event.latlng.lat).replace('LNG', event.latlng.lng)).openPopup();
+
+                customAttributionMarkers.push(marker);
+            });
+        })();
+    </script>
+    
+    <style>
+        .leaflet-container a.text-white {
+            color: white;
+        }
+    </style>
+    
+    <template id="add-comment">
+        {{ component('button', {type: 'primary', label: 'group.index.add_comment'|trans, href: path('group.add_comment', {lat: 'LAT', lng: 'LNG'})}) }}
+    </template>
+    
+    {{ parent() }}
+{% endblock %}
