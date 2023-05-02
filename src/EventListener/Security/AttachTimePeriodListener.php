@@ -26,6 +26,6 @@ class AttachTimePeriodListener
             return;
         }
 
-        $this->requestStack->getSession()->set('time_period', $timePeriod);
+        $this->requestStack->getSession()->set('time_period', $timePeriod->getId());
     }
 }

@@ -22,6 +22,10 @@ device:
     password: 'Password'
     repeat_password: 'Repeat password'
 
+approval:
+    approved: 'Approve this data to be imported'
+    approved_help: 'A very nice help message for this field describing the import approval for this time period'
+
 device_group:
     name: 'Name'
     password: 'Password'
