@@ -1,6 +1,10 @@
 {% extends 'device/layout.html.twig' %}
 
 {% block content %}
+    {% if approval.importState == constant('App\\Model\\ImportState::Importing') %}
+        {{ component('info_panel', {type: 'warning', text: 'device.currently_importing.text'|trans}) }}
+    {% endif %}
+    
     {% if not approval.approved %}
         {{ component('info_panel', {title: 'device.approval_info.title'|trans, text: 'device.approval_info.text'|trans}) }}
     {% endif %}
@@ -13,7 +17,10 @@
         
         {% block card_footer %}
             <div class="flex flex-col items-end">
-                {{ component('button', {type: 'primary', label: 'device.index.approve'|trans}) }}
+                <div class="flex flex-row items-center">
+                    {% if approval.lastImported %}<span class="mr-3 text-xs text-gray-500">{{ 'device.last_imported'|trans({'{date}': approval.lastImported|date('d.m.Y H:i:s')})|raw }}</span>{% endif %}
+                    {{ component('button', {type: 'primary', label: 'device.index.approve'|trans}) }}
+                </div>
             </div>
         {% endblock %}
     {% endcomponent %}

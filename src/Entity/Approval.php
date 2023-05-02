@@ -7,6 +7,7 @@ namespace App\Entity;
 use App\Database\Field\CreatedAt;
 use App\Database\Field\Id;
 use App\Database\Field\UpdatedAt;
+use App\Model\ImportState;
 use App\Repository\DeviceRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -29,6 +30,12 @@ class Approval
 
     #[ORM\Column(type: Types::BOOLEAN)]
     private bool $approved = false;
+
+    #[ORM\Column(type: Types::INTEGER, enumType: ImportState::class)]
+    private ImportState $importState = ImportState::NotImported;
+
+    #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE, nullable: true)]
+    private ?\DateTimeInterface $lastImported = null;
 
     public function getTimePeriod(): ?TimePeriod
     {
@@ -62,6 +69,30 @@ class Approval
     public function setApproved(bool $approved): self
     {
         $this->approved = $approved;
+
+        return $this;
+    }
+
+    public function getImportState(): ImportState
+    {
+        return $this->importState;
+    }
+
+    public function setImportState(ImportState $importState): self
+    {
+        $this->importState = $importState;
+
+        return $this;
+    }
+
+    public function getLastImported(): ?\DateTimeInterface
+    {
+        return $this->lastImported;
+    }
+
+    public function setLastImported(?\DateTimeInterface $lastImported): self
+    {
+        $this->lastImported = $lastImported;
 
         return $this;
     }
