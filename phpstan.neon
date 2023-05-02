@@ -10,7 +10,7 @@ parameters:
         container_xml_path: var/cache/dev/App_KernelDevDebugContainer.xml
 
     ignoreErrors:
-        - '#Parameter \#1 \$callback of function array_map#'
+        - '#Parameter .* of function array_map#'
         -
             message: '#Method .* should return .* but returns mixed\.#'
             path: %currentWorkingDirectory%/src/Repository

@@ -8,6 +8,7 @@ use App\Entity\Device;
 use App\Event\ApprovalChangeEvent;
 use App\Form\ApprovalType;
 use App\Repository\ApprovalRepository;
+use App\Repository\MetricRepository;
 use App\Service\TimePeriodProvider;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,7 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
-#[Route(path: '/device', name: 'device.index')]
+#[Route(path: '/device/{date}', name: 'device.index', defaults: ['date' => null])]
 class Index extends AbstractController
 {
     public function __construct(
@@ -24,10 +25,11 @@ class Index extends AbstractController
         private readonly ApprovalRepository $approvalRepository,
         private readonly EntityManagerInterface $entityManager,
         private readonly EventDispatcherInterface $eventDispatcher,
+        private readonly MetricRepository $metricRepository,
     ) {
     }
 
-    public function __invoke(Request $request): Response
+    public function __invoke(Request $request, ?string $date): Response
     {
         /** @var Device $device */
         $device = $this->getUser();
@@ -50,10 +52,32 @@ class Index extends AbstractController
             return $this->redirectToRoute('device.index');
         }
 
+        $availableDates = $this->metricRepository->findAvailableDatesForApproval($approval);
+        $filterDate = $this->getFilterDate($date);
+
+        $dataPoints = $this->metricRepository->findDataPointsForApproval($approval, $filterDate);
+
         return $this->render('/device/index.html.twig', [
             'timePeriod' => $timePeriod,
             'approval' => $approval,
             'form' => $form,
+            'dates' => $availableDates,
+            'dataPoints' => $dataPoints,
+            'filterDate' => $filterDate,
         ]);
+    }
+
+    private function getFilterDate(?string $dateString): ?\DateTimeInterface
+    {
+        if (null === $dateString) {
+            return null;
+        }
+
+        try {
+            return new \DateTimeImmutable($dateString);
+        } catch (\Exception) {
+        }
+
+        return null;
     }
 }

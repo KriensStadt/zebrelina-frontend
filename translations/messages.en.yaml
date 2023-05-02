@@ -17,6 +17,7 @@ device:
 
     index:
         approve: 'Approve'
+        filter_by_date: 'Filter by Date'
 
     currently_importing:
         text: 'This data is currently being imported. Please check back in a few minutes'

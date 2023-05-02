@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Service\Api;
 
 use App\Model\DataImporterInterface;
+use App\Model\DataPoint;
 use Doctrine\DBAL\Connection;
 
 class RemoteDatabaseDataImporter implements DataImporterInterface

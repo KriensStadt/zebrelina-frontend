@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Model;
 
-use App\Service\Api\DataPoint;
-
 interface DataImporterInterface
 {
     /**
