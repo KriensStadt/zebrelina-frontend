@@ -9,6 +9,16 @@ FROM composer/composer:2-bin AS composer
 
 FROM mlocati/php-extension-installer:latest AS php_extension_installer
 
+# Build Node
+FROM node:18-alpine AS app_node
+
+WORKDIR /srv/app
+
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+
 # Build Caddy
 FROM caddy:2.6-builder-alpine AS app_caddy_builder
 
@@ -68,6 +78,8 @@ HEALTHCHECK --interval=10s --timeout=3s --retries=3 CMD ["docker-healthcheck"]
 
 COPY --link docker/php/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 RUN chmod +x /usr/local/bin/docker-entrypoint
+
+COPY --from=app_node /srv/app/public/build public/build
 
 ENTRYPOINT ["docker-entrypoint"]
 CMD ["php-fpm"]
