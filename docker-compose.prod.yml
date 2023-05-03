@@ -1,0 +1,6 @@
+version: '3.4'
+
+services:
+  php:
+    environment:
+      APP_SECRET: ${APP_SECRET}
