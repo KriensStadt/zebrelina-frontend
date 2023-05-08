@@ -21,6 +21,12 @@ $> symfony serve
 * Postgres
 * pgadmin: [localhost:5050](localhost:5050)
 
+## Run in Production
+
+```
+$> SERVER_NAME={domain} docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+```
+
 ## Installation
 
 ```
