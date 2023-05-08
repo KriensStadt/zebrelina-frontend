@@ -4,3 +4,4 @@ services:
   php:
     environment:
       APP_SECRET: ${APP_SECRET}
+      APP_ENV: prod
