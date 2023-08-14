@@ -5,3 +5,13 @@ services:
         environment:
             APP_SECRET: ${APP_SECRET}
             APP_ENV: prod
+
+    node:
+        build:
+            context: .
+            target: app_node
+
+        volumes:
+            -   ./:/srv/app
+
+        command: 'sh -c "npm install; npm run build"'
