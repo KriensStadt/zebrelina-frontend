@@ -130,6 +130,9 @@ RUN set -eux; \
 
 RUN rm -f .env.local.php
 
+# Messenger image
+FROM app_php AS app_messenger
+
 # Caddy image
 FROM caddy:2.6-alpine AS app_caddy
 
