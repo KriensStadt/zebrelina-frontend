@@ -23,7 +23,7 @@
                         </svg>
                     </button>
                     
-                    <div data-toggle hidden class="z-[99999] absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="option-menu-button" tabindex="-1">
+                    <div data-toggle hidden class="z-[9999] absolute right-0 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="option-menu-button" tabindex="-1">
                         <div class="py-1" role="none">
                             {% for date in dates %}
                                 <a href="{{ path('group.index', {date: date|date('Y-m-d')}) }}" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900" role="menuitem" tabindex="-1" id="option-menu-item-0">{{ date|date('d.m.Y') }}</a>
