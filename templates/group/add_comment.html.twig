@@ -16,7 +16,7 @@
                     {{ form_row(form.commentType) }}
                     {{ form_row(form.content) }}
                 {% endblock %}
-                
+
                 {% block card_footer %}
                     <div class="flex flex-col items-end">
                         {{ component('button', {type: 'primary', label: 'global.save'|trans}) }}
@@ -25,20 +25,20 @@
             {% endcomponent %}
             {{ form_end(form) }}
         </div>
-        
+
         <div id="map" class="aspect-video w-96"></div>
     </div>
 {% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="">
-    
+
     {{ parent() }}
 {% endblock %}
 
 {% block javascripts %}
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
-    
+
     <script>
         (function () {
             if (!document.getElementById('map')) {
@@ -52,7 +52,7 @@
                 maxZoom: 19,
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             }).addTo(map);
-            
+
             const item = {point: [{{ lat }}, {{ lng }}]};
 
             L.marker(item.point).addTo(map);

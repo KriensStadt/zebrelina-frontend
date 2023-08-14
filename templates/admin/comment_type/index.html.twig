@@ -4,11 +4,11 @@
 {% block subtitle %}List of comment types{% endblock %}
 
 {% block buttons %}
-    {{ component('button', {type: 'primary', label: 'admin.comment_type.create_comment_type'|trans, href: path('admin.comment_type.create') }) }}
+    {{ component('button', {type: 'primary', label: 'admin.comment_type.create_comment_type'|trans, href: path('admin.comment_type.create')}) }}
 {% endblock %}
 
 {% block content %}
-    
+
     {% if commentTypes|length %}
         {% component card %}
             {% block card_content %}
@@ -30,7 +30,7 @@
                     {% endfor %}
                 </ul>
             {% endblock %}
-    
+
             {% block card_footer %}
                 {% include 'partials/pagination.html.twig' with {paginator: commentTypes} %}
             {% endblock %}

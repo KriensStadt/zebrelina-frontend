@@ -4,9 +4,9 @@
     {% if approval.importState == constant('App\\Model\\ImportState::Importing') %}
         {{ component('info_panel', {type: 'warning', text: 'device.currently_importing.text'|trans}) }}
     {% endif %}
-    
+
     {% if approval.importState == constant('App\\Model\\ImportState::Ready') %}
-        
+
         <div class="flex flex-col items-end mb-3">
             <div class="inline-flex rounded-md shadow-sm" data-filter>
                 {% if filterDate %}
@@ -27,7 +27,7 @@
                             <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
                         </svg>
                     </button>
-                    
+
                     <div data-toggle hidden class="z-[9999] absolute right-0 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="option-menu-button" tabindex="-1">
                         <div class="py-1" role="none">
                             {% for date in dates %}
@@ -47,17 +47,17 @@
             {% endblock %}
         {% endcomponent %}
     {% endif %}
-    
+
     {% if not approval.approved %}
         {{ component('info_panel', {title: 'device.approval_info.title'|trans, text: 'device.approval_info.text'|trans}) }}
     {% endif %}
-    
+
     {{ form_start(form) }}
     {% component card %}
         {% block card_body %}
             {{ form_row(form.approved) }}
         {% endblock %}
-        
+
         {% block card_footer %}
             <div class="flex flex-col items-end">
                 <div class="flex flex-row items-center">
@@ -78,13 +78,13 @@
 
 {% block javascripts %}
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
-    
+
     <script>
         (function () {
             if (!document.getElementById('map')) {
                 return;
             }
-            
+
             const dP = [];
             const cP = [];
 
@@ -93,7 +93,7 @@
                     {% for dataPoint in dataPoints %}dP.push({point: [{{ dataPoint.latitude }}, {{ dataPoint.longitude }}], popup: '{{ dataPoint.created|date('d.m.Y H:i:s') }}'});{% endfor %}
                 {% endif %}
             {% endapply %}
-            
+
             {% apply spaceless %}
                 {% if commentPoints|length %}
                     {% for dataPoint in commentPoints %}cP.push({point: [{{ dataPoint.latitude }}, {{ dataPoint.longitude }}], popup: '{{ dataPoint.content }}'});{% endfor %}
@@ -121,37 +121,37 @@
                 L.marker(item.point).addTo(map).bindPopup(item.popup);
                 bounds.push(item.point);
             });
-            
+
             cP.forEach((item) => {
                 L.marker(item.point, {icon: greenIcon}).addTo(map).bindPopup(item.popup);
                 // bounds.push(item.point);
             });
 
             map.fitBounds(bounds);
-            
+
             const customAttributionMarkers = [];
             map.on('click', (event) => {
                 customAttributionMarkers.forEach((existingMarker) => {
                     map.removeLayer(existingMarker);
                 })
-                
+
                 const marker = L.marker(event.latlng,  {icon: greenIcon});
                 marker.addTo(map).bindPopup(document.getElementById('add-comment').innerHTML.replace('LAT', event.latlng.lat).replace('LNG', event.latlng.lng)).openPopup();
-                
+
                 customAttributionMarkers.push(marker);
             });
         })();
     </script>
-    
+
     <style>
         .leaflet-container a.text-white {
             color: white;
         }
     </style>
-    
+
     <template id="add-comment">
         {{ component('button', {type: 'primary', label: 'device.index.add_comment'|trans, href: path('device.add_comment', {lat: 'LAT', lng: 'LNG'})}) }}
     </template>
-    
+
     {{ parent() }}
 {% endblock %}

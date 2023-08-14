@@ -3,6 +3,8 @@
     "type": "project",
     "php": ">=8.1",
     "require-dev": {
-        "vincentlanglet/twig-cs-fixer": "^1.0"
+        "vincentlanglet/twig-cs-fixer": "^1.0",
+        "symfony/http-kernel": "6.3.*",
+        "symfony/ux-twig-component": "^2.7"
     }
 }
