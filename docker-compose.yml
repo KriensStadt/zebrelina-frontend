@@ -19,6 +19,8 @@ services:
         environment:
             DATABASE_URL: ${DATABASE_URL}
             REMOTE_DATABASE_URL: ${REMOTE_DATABASE_URL}
+        depends_on:
+            - database
         networks:
             - zebrina
 
@@ -48,6 +50,8 @@ services:
             -   target: 443
                 published: ${HTTP3_PORT:-443}
                 protocol: udp
+        networks:
+            - zebrina
 
     database:
         container_name: database
@@ -60,6 +64,8 @@ services:
             - '5432'
         volumes:
             - 'db-data:/var/lib/postgresql/data:rw'
+        networks:
+            - zebrina
 
 volumes:
     db-data:
