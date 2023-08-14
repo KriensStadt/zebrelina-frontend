@@ -2,12 +2,16 @@ services:
     # Gedmo Extensions
     Gedmo\Timestampable\TimestampableListener:
         tags:
-            - { name: 'doctrine.event_subscriber', connection: 'default' }
+            - { name: 'doctrine.event_listener', event: 'prePersist' }
+            - { name: 'doctrine.event_listener', event: 'onFlush' }
+            - { name: 'doctrine.event_listener', event: 'loadClassMetadata' }
         calls:
             - [ 'setAnnotationReader', [ '@annotation_reader' ] ]
 
     Gedmo\Sluggable\SluggableListener:
         tags:
-            - { name: 'doctrine.event_subscriber', connection: 'default' }
+            - { name: 'doctrine.event_listener', event: 'onFlush' }
+            - { name: 'doctrine.event_listener', event: 'loadClassMetadata' }
+            - { name: 'doctrine.event_listener', event: 'prePersist' }
         calls:
             - [ 'setAnnotationReader', [ '@annotation_reader' ] ]
