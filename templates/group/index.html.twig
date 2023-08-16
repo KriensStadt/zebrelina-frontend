@@ -145,7 +145,7 @@
     </style>
 
     <template id="add-comment">
-        {{ component('button', {type: 'primary', label: 'group.index.add_comment'|trans, href: path('group.add_comment', {lat: 'LAT', lng: 'LNG'})}) }}
+        {{ component('button', {type: 'primary', label: 'group.index.add_comment'|trans, href: path('group.add_comment', {lat: 'LAT', lng: 'LNG', date: date})}) }}
     </template>
 
     {{ parent() }}

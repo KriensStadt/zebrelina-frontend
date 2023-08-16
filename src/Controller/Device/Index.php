@@ -61,6 +61,7 @@ class Index extends AbstractController
         $commentPoints = $this->commentRepository->findDataPointsForApproval($approval);
 
         return $this->render('/device/index.html.twig', [
+            'date' => $date,
             'timePeriod' => $timePeriod,
             'approval' => $approval,
             'form' => $form,

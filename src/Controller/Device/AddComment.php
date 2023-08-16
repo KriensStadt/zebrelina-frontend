@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route(path: '/device/add-comment/{lat}/{lng}', name: 'device.add_comment')]
+#[Route(path: '/device/add-comment/{lat}/{lng}/{date}', name: 'device.add_comment', requirements: ['date' => '\d+-\d+-\d+'], defaults: ['date' => null])]
 class AddComment extends AbstractController
 {
     public function __construct(
@@ -26,7 +26,7 @@ class AddComment extends AbstractController
     ) {
     }
 
-    public function __invoke(Request $request, float $lat, float $lng): Response
+    public function __invoke(Request $request, float $lat, float $lng, ?string $date): Response
     {
         $lng = round($lng, 5);
         $lat = round($lat, 5);
@@ -52,7 +52,9 @@ class AddComment extends AbstractController
             $this->entityManager->persist($comment);
             $this->entityManager->flush();
 
-            return $this->redirectToRoute('device.index');
+            return $this->redirectToRoute('device.index', [
+                'date' => $date,
+            ]);
         }
 
         return $this->render('device/add_comment.html.twig', [

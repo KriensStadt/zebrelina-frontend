@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route(path: '/group/add-comment/{lat}/{lng}', name: 'group.add_comment')]
+#[Route(path: '/group/add-comment/{lat}/{lng}/{date}', name: 'group.add_comment', requirements: ['date' => '\d+-\d+-\d+'], defaults: ['date' => null])]
 class AddComment extends AbstractController
 {
     public function __construct(
@@ -23,7 +23,7 @@ class AddComment extends AbstractController
     ) {
     }
 
-    public function __invoke(Request $request, float $lat, float $lng): Response
+    public function __invoke(Request $request, float $lat, float $lng, ?string $date): Response
     {
         /** @var DeviceGroup $deviceGroup */
         $deviceGroup = $this->getUser();
@@ -45,7 +45,9 @@ class AddComment extends AbstractController
             $this->entityManager->persist($comment);
             $this->entityManager->flush();
 
-            return $this->redirectToRoute('group.index');
+            return $this->redirectToRoute('group.index', [
+                'date' => $date,
+            ]);
         }
 
         return $this->render('group/add_comment.html.twig', [

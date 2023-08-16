@@ -37,6 +37,7 @@ class Index extends AbstractController
         $groupCommentPoints = $this->commentRepository->findGroupDataPointsForGroupAndTimePeriod($group, $timePeriod);
 
         return $this->render('/group/index.html.twig', [
+            'date' => $date,
             'timePeriod' => $timePeriod,
             'dates' => $availableDates,
             'filterDate' => $filterDate,
