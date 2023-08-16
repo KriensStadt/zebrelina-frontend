@@ -17,8 +17,18 @@
     {% endblock %}
 </head>
 <body class="h-full">
-{% block body %}
-{% endblock %}
+<div class="min-h-screen flex flex-col">
+    {% block body %}{% endblock %}
+
+    <footer class="shrink">
+        <div class="mx-auto max-w-7xl py-1 px-2 sm:px-6 lg:px-8">
+            <div class="text-center text-xs text-gray-800">
+                <span>&copy; {{ 'today'|date('Y') }} StadtKriens</span> |
+                {% include 'partials/language_switcher.html.twig' %}
+            </div>
+        </div>
+    </footer>
+</div>
 
 {% block modals %}{% endblock %}
 

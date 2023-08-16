@@ -40,18 +40,18 @@ security:
     error: 'An error occured'
 
     login_admin:
-        title: 'Zebrina Admin 🦓 (en)'
+        title: 'Zebrina Admin 🦓 (fr)'
         subtitle: 'Login to your admin account'
         remember: 'Remember me'
         submit: 'Login'
 
     login_device:
-        title: 'Zebrina 🦓 (en)'
+        title: 'Zebrina 🦓 (fr)'
         subtitle: 'Login to your device'
         submit: 'Login'
 
     login_group:
-        title: 'Zebrina Groups 🦓 (en)'
+        title: 'Zebrina Groups 🦓 (fr)'
         subtitle: 'Login to your group'
         submit: 'Login'
 

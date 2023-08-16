@@ -1,0 +1,3 @@
+{% for locale in enabled_locales %}
+    <a href="?_locale={{ locale }}" class="{% if locale == app.locale %}font-bold text-indigo-600{% endif %}">{{ locale }}</a> {% if not loop.last %}/{% endif %}
+{% endfor %}

@@ -1,0 +1,51 @@
+login_admin:
+    username: 'Username'
+    password: 'Password'
+
+device_login:
+    username: 'Device Name'
+    password: 'Password'
+    time_period: 'Time period'
+
+group_login:
+    username: 'Group Name'
+    password: 'Password'
+    time_period: 'Time period'
+
+admin:
+    username: 'Username'
+    password: 'Password'
+    repeat_password: 'Repeat password'
+
+device:
+    name: 'Name'
+    password: 'Password'
+    repeat_password: 'Repeat password'
+
+approval:
+    approved: 'Approve this data to be imported'
+    approved_help: 'A very nice help message for this field describing the import approval for this time period'
+
+device_group:
+    name: 'Name'
+    password: 'Password'
+    repeat_password: 'Repeat password'
+    devices: 'Devices'
+    devices_help: 'Add at least one device to this group'
+
+time_period:
+    name: 'Name'
+    period_start: 'From'
+    period_end: 'To'
+    active: 'Active'
+    auto_close: 'Auto Close'
+    auto_close_help: 'Automatically disable this time period when the period ends'
+
+comment:
+    content: 'Content'
+    content_help: 'Add a beautiful description how to best use this field'
+    comment_type: 'Type'
+    comment_type_help: 'Type help'
+
+comment_type:
+    name: 'Name'
