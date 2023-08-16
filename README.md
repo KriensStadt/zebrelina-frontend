@@ -43,6 +43,10 @@ $> npm run build
 $> pv dump.pg | docker exec -i zebrina_database_1 psql -U zebrina_user zebrina_db
 ```
 
+## Configuration
+
+The logo will be read from `/public/logo.png`. If no logo is present, a default emoji is shown.
+
 # Test
 
 Run test suites
