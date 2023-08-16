@@ -7,6 +7,7 @@ namespace App\Controller\Group;
 use App\Entity\DeviceGroup;
 use App\Repository\CommentRepository;
 use App\Repository\MetricRepository;
+use App\Service\PolylineGenerator;
 use App\Service\TimePeriodProvider;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,6 +20,7 @@ class Index extends AbstractController
         private readonly TimePeriodProvider $timePeriodProvider,
         private readonly MetricRepository $metricRepository,
         private readonly CommentRepository $commentRepository,
+        private readonly PolylineGenerator $polylineGenerator,
     ) {
     }
 
@@ -35,6 +37,7 @@ class Index extends AbstractController
         $dataPoints = $this->metricRepository->findDataPointsForGroupAndTimePeriod($group, $timePeriod, $filterDate);
         $commentPoints = $this->commentRepository->findDataPointsForGroupAndTimePeriod($group, $timePeriod);
         $groupCommentPoints = $this->commentRepository->findGroupDataPointsForGroupAndTimePeriod($group, $timePeriod);
+        $polylines = $this->polylineGenerator->createLines($dataPoints);
 
         return $this->render('/group/index.html.twig', [
             'date' => $date,
@@ -44,6 +47,7 @@ class Index extends AbstractController
             'dataPoints' => $dataPoints,
             'commentPoints' => $commentPoints,
             'groupCommentPoints' => $groupCommentPoints,
+            'polylines' => $polylines,
         ]);
     }
 

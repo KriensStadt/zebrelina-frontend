@@ -10,6 +10,7 @@ use App\Form\ApprovalType;
 use App\Repository\ApprovalRepository;
 use App\Repository\CommentRepository;
 use App\Repository\MetricRepository;
+use App\Service\PolylineGenerator;
 use App\Service\TimePeriodProvider;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,6 +29,7 @@ class Index extends AbstractController
         private readonly EventDispatcherInterface $eventDispatcher,
         private readonly MetricRepository $metricRepository,
         private readonly CommentRepository $commentRepository,
+        private readonly PolylineGenerator $polylineGenerator,
     ) {
     }
 
@@ -59,6 +61,7 @@ class Index extends AbstractController
 
         $dataPoints = $this->metricRepository->findDataPointsForApproval($approval, $filterDate);
         $commentPoints = $this->commentRepository->findDataPointsForApproval($approval);
+        $polylines = $this->polylineGenerator->createLines($dataPoints);
 
         return $this->render('/device/index.html.twig', [
             'date' => $date,
@@ -69,6 +72,7 @@ class Index extends AbstractController
             'dataPoints' => $dataPoints,
             'commentPoints' => $commentPoints,
             'filterDate' => $filterDate,
+            'polylines' => $polylines,
         ]);
     }
 

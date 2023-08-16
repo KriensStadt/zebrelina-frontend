@@ -10,9 +10,6 @@
                         {% if not hasPlatformLogo() %}
                             🦓
                         {% else %}
-
-                            {% dump(getPlatformLogoPath()) %}
-
                             <img class="h-10" src="{{ asset(getPlatformLogoPath()) }}" alt="Logo">
                         {% endif %}
                     </a>

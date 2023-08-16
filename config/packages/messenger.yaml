@@ -14,8 +14,3 @@ framework:
         routing:
             'App\Messenger\Message\ImportDataMessage': async
 
-when@dev:
-    framework:
-        messenger:
-            transports:
-                async: 'sync://'

@@ -62,19 +62,39 @@
             const dP = [];
             const cP = [];
             const gP = [];
+            const pLs = [];
+            let pL = [];
 
+            {# Dots #}
             {% apply spaceless %}
             {% if dataPoints|length %}
             {% for dataPoint in dataPoints %}dP.push({point: [{{ dataPoint.latitude }}, {{ dataPoint.longitude }}], popup: '{{ dataPoint.created|date('d.m.Y H:i:s') }}'});{% endfor %}
             {% endif %}
             {% endapply %}
 
+            {# Lines #}
+            {% apply spaceless %}
+            {% if polylines|length %}
+                {% for polyline in polylines %}
+                    pL = [];
+
+                    {% for dataPoint in polyline %}
+                        pL.push([{{ dataPoint.latitude }}, {{ dataPoint.longitude }}]);
+                    {% endfor %}
+
+                    pLs.push(pL)
+            {% endfor %}
+            {% endif %}
+            {% endapply %}
+
+            {# Device comments #}
             {% apply spaceless %}
             {% if commentPoints|length %}
             {% for dataPoint in commentPoints %}cP.push({point: [{{ dataPoint.latitude }}, {{ dataPoint.longitude }}], popup: '{{ dataPoint.content }}'});{% endfor %}
             {% endif %}
             {% endapply %}
 
+            {# Group comments #}
             {% apply spaceless %}
             {% if groupCommentPoints|length %}
             {% for dataPoint in groupCommentPoints %}gP.push({point: [{{ dataPoint.latitude }}, {{ dataPoint.longitude }}], popup: '{{ dataPoint.content }}'});{% endfor %}
@@ -85,21 +105,27 @@
             let bounds = [];
 
             const greenIcon = new L.Icon({
-                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
-                shadowUrl: 'https://unpkg.com/leaflet@1.9.3/dist/images/marker-shadow.png',
-                iconSize: [25, 41],
-                iconAnchor: [12, 41],
+                iconUrl: '{{ asset('/images/green-dot.png') }}',
+                iconSize: [20, 20],
+                iconAnchor: [10, 10],
                 popupAnchor: [1, -34],
-                shadowSize: [41, 41]
+                shadowSize: [0, 0]
             });
 
             const violetIcon = new L.Icon({
-                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
-                shadowUrl: 'https://unpkg.com/leaflet@1.9.3/dist/images/marker-shadow.png',
-                iconSize: [25, 41],
-                iconAnchor: [12, 41],
+                iconUrl: '{{ asset('/images/purple-dot.png') }}',
+                iconSize: [20, 20],
+                iconAnchor: [10, 10],
                 popupAnchor: [1, -34],
-                shadowSize: [41, 41]
+                shadowSize: [0, 0]
+            });
+
+            const blueIcon = new L.Icon({
+                iconUrl: '{{ asset('/images/blue-dot.png') }}',
+                iconSize: [20, 20],
+                iconAnchor: [10, 10],
+                popupAnchor: [1, -34],
+                shadowSize: [0, 0]
             });
 
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -108,8 +134,12 @@
             }).addTo(map);
 
             dP.forEach((item) => {
-                L.marker(item.point).addTo(map).bindPopup(item.popup);
+                L.marker(item.point, {icon: blueIcon}).addTo(map).bindPopup(item.popup);
                 bounds.push(item.point);
+            });
+
+            pLs.forEach((item) => {
+                L.polyline(item, {color: 'red'}).addTo(map);
             });
 
             cP.forEach((item) => {

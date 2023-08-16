@@ -35,10 +35,15 @@ class MetricRepository extends ServiceEntityRepository
             ->select([
                 'm.created',
                 'ST_X(m.point) AS lon',
-                'ST_Y(m.point) AS lat'
+                'ST_Y(m.point) AS lat',
+                'd.name AS grp'
             ])
 
-            ->andWhere('m.approval = :approval')
+            ->leftJoin('m.approval', 'a')
+            ->leftJoin('a.device', 'd')
+
+            ->andWhere('a = :approval')
+
             ->setParameter('approval', $approval)
         ;
 
@@ -63,7 +68,8 @@ class MetricRepository extends ServiceEntityRepository
             ->select([
                 'm.created',
                 'ST_X(m.point) AS lon',
-                'ST_Y(m.point) AS lat'
+                'ST_Y(m.point) AS lat',
+                'CONCAT(g.name, d.name) as grp',
             ])
 
             ->leftJoin('m.approval', 'a')
@@ -73,6 +79,9 @@ class MetricRepository extends ServiceEntityRepository
             ->andWhere('a.timePeriod = :timePeriod')
             ->andWhere('a.approved = true')
             ->andWhere('g = :group')
+
+            ->addOrderBy('grp')
+            ->addOrderBy('m.created')
 
             ->setParameter('timePeriod', $timePeriod)
             ->setParameter('group', $deviceGroup)
@@ -152,10 +161,14 @@ class MetricRepository extends ServiceEntityRepository
             /** @var \DateTimeInterface $time */
             $time = $result['created'];
 
+            /** @var ?string $group */
+            $group = $result['grp'] ?? null;
+
             return new DataPoint(
                 latitude: round((float) $lat, 5),
                 longitude: round((float) $lon, 5),
-                created: $time
+                created: $time,
+                group: $group,
             );
         }, $result);
     }
