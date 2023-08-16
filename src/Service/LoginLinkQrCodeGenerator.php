@@ -36,8 +36,6 @@ class LoginLinkQrCodeGenerator
 
         $result = $builder->build();
 
-        dump($url);
-
         return $result->getDataUri();
     }
 }
