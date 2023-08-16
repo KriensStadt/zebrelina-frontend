@@ -4,7 +4,7 @@ security:
 
     role_hierarchy:
         ROLE_DEVICE: ROLE_USER
-        ROLE_DEVICE_GROUP: ROLE_USER
+        ROLE_GROUP: ROLE_USER
         ROLE_ADMIN: ROLE_USER
 
     providers:

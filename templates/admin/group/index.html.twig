@@ -4,6 +4,7 @@
 {% block subtitle %}List of groups{% endblock %}
 
 {% block buttons %}
+    {{ component('button', {type: 'default', label: 'admin.group.qr_code_wizard'|trans, href: path('admin.group.qr_code_wizard')}) }}
     {{ component('button', {type: 'primary', label: 'admin.group.create_group'|trans, href: path('admin.group.create')}) }}
 {% endblock %}
 

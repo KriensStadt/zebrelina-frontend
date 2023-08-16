@@ -49,3 +49,15 @@ comment:
 
 comment_type:
     name: 'Name'
+
+device_qr_code:
+    device: 'Device'
+    time_period: 'Time Period'
+    password: 'Password'
+    password_help: 'Will be printed as a label on the resulting QR Code'
+
+group_qr_code:
+    device: 'Device Group'
+    time_period: 'Time Period'
+    password: 'Password'
+    password_help: 'Will be printed as a label on the resulting QR Code'

@@ -17,6 +17,7 @@
         "doctrine/doctrine-fixtures-bundle": "^3.4",
         "doctrine/orm": "^2.14",
         "doctrine/persistence": "^3.1",
+        "endroid/qr-code": "^4.8",
         "gedmo/doctrine-extensions": "^3.11",
         "jsor/doctrine-postgis": "^2.2",
         "knplabs/knp-menu": "^3.3",

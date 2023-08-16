@@ -61,10 +61,12 @@ admin:
 
     device:
         create_device: 'Create device'
+        qr_code_wizard: 'Create Login QR Code'
 
     group:
         create_group: 'Create group'
         number_of_devices: '{number} devices'
+        qr_code_wizard: 'Create Login QR Code'
 
     time_period:
         create_time_period: 'Create time period'

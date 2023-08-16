@@ -4,6 +4,7 @@
 {% block subtitle %}List of devices{% endblock %}
 
 {% block buttons %}
+    {{ component('button', {type: 'default', label: 'admin.device.qr_code_wizard'|trans, href: path('admin.device.qr_code_wizard')}) }}
     {{ component('button', {type: 'primary', label: 'admin.device.create_device'|trans, href: path('admin.device.create')}) }}
 {% endblock %}
 
