@@ -25,7 +25,7 @@ class RemoteDatabaseDataImporter implements DataImporterInterface
             FROM metrics
             WHERE
                 device_id = :device AND
-                DATE(time) BETWEEN :from AND :to
+                time BETWEEN :from AND :to
             ORDER BY time DESC
         ', [
             'device' => $deviceName,
