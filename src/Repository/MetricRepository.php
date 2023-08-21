@@ -118,7 +118,7 @@ class MetricRepository extends ServiceEntityRepository
             ->execute()
         ;
 
-        return array_map(fn (array $result) => new \DateTimeImmutable($result['created']), $results);
+        return array_map(fn (array $result) => new \DateTimeImmutable($result['created'], new \DateTimeZone('Europe/Zurich')), $results);
     }
 
     public function findAvailableDatesForGroupAndTimePeriod(DeviceGroup $deviceGroup, TimePeriod $timePeriod): array
@@ -143,7 +143,7 @@ class MetricRepository extends ServiceEntityRepository
             ->execute()
         ;
 
-        return array_map(fn (array $result) => new \DateTimeImmutable($result['created']), $results);
+        return array_map(fn (array $result) => new \DateTimeImmutable($result['created'], new \DateTimeZone('Europe/Zurich')), $results);
     }
 
     /**

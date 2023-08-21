@@ -46,6 +46,6 @@ readonly class RemoteMetricRepository
 
         $results = $result->fetchFirstColumn();
 
-        return array_map(fn (string $date) => new \DateTimeImmutable($date), $results);
+        return array_map(fn (string $date) => new \DateTimeImmutable($date, new \DateTimeZone('Europe/Zurich')), $results);
     }
 }

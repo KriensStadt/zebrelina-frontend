@@ -46,7 +46,7 @@ class RemoteDatabaseDataImporter implements DataImporterInterface
             return new DataPoint(
                 latitude: round((float) $lat, 5),
                 longitude: round((float) $lon, 5),
-                created: new \DateTimeImmutable($time),
+                created: new \DateTimeImmutable($time, new \DateTimeZone('Europe/Zurich')),
             );
         }, $query->fetchAllAssociative());
     }

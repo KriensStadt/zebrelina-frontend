@@ -83,7 +83,7 @@ class Index extends AbstractController
         }
 
         try {
-            return new \DateTimeImmutable($dateString);
+            return new \DateTimeImmutable($dateString, new \DateTimeZone('Europe/Zurich'));
         } catch (\Exception) {
         }
 

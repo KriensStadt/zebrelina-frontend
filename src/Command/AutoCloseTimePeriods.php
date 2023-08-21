@@ -25,7 +25,7 @@ class AutoCloseTimePeriods extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $now = new \DateTimeImmutable('now');
+        $now = new \DateTimeImmutable('now', new \DateTimeZone('Europe/Zurich'));
 
         $timePeriods = $this->timePeriodRepository->findAutoClosable($now);
 

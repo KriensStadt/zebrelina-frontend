@@ -66,7 +66,7 @@ class ImportDataMessageHandler
             $this->entityManager->persist($metric);
         }
 
-        $approval->setLastImported(new \DateTimeImmutable('now'));
+        $approval->setLastImported(new \DateTimeImmutable('now', new \DateTimeZone('Europe/Zurich')));
         $approval->setImportState(ImportState::Ready);
 
         $this->entityManager->persist($approval);
