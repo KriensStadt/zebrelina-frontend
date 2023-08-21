@@ -44,6 +44,8 @@ class MetricRepository extends ServiceEntityRepository
 
             ->andWhere('a = :approval')
 
+            ->addOrderBy('m.created', 'ASC')
+
             ->setParameter('approval', $approval)
         ;
 
