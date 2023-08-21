@@ -17,6 +17,9 @@ class RemoteDatabaseDataImporter implements DataImporterInterface
 
     public function import(string $deviceName, \DateTimeInterface $from, \DateTimeInterface $to): array
     {
+        $from = \DateTime::createFromInterface($from)->setTimezone(new \DateTimeZone('Europe/Zurich'));
+        $to = \DateTime::createFromInterface($to)->setTimezone(new \DateTimeZone('Europe/Zurich'));
+
         $query = $this->remoteConnection->executeQuery('
             SELECT
                 time,
