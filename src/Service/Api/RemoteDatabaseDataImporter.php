@@ -29,8 +29,8 @@ class RemoteDatabaseDataImporter implements DataImporterInterface
             ORDER BY time DESC
         ', [
             'device' => $deviceName,
-            'from' => $from->format('Y-m-d'),
-            'to' => $to->format('Y-m-d'),
+            'from' => $from->format('Y-m-d H:i:s'),
+            'to' => $to->format('Y-m-d 23:59:59'),
         ]);
 
         return array_map(function (array $result): DataPoint {
