@@ -101,7 +101,7 @@
             {% endif %}
             {% endapply %}
 
-            const map = L.map('map').setView([51.505, -0.09], 13);
+            const map = L.map('map').setView([47.034188, 8.277281], 13);
             let bounds = [];
 
             const greenIcon = new L.Icon({
@@ -152,7 +152,9 @@
                 bounds.push(item.point);
             });
 
-            map.fitBounds(bounds);
+            if (bounds.length > 0) {
+                map.fitBounds(bounds);
+            }
 
             const customAttributionMarkers = [];
             map.on('click', (event) => {

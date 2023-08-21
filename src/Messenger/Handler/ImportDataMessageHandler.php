@@ -44,6 +44,17 @@ class ImportDataMessageHandler
         /** @var \DateTimeInterface $to */
         $to = $timePeriod->getPeriodEnd();
 
+        // If this approval was imported after the period ends, do nothing
+        // Since the metrics are append only, there is nothing to import anymore.
+        if ($from > $to) {
+            $approval->setImportState(ImportState::Ready);
+
+            $this->entityManager->persist($approval);
+            $this->entityManager->flush();
+
+            return;
+        }
+
         $dataPoints = $this->dataImporter->import((string) $device->getName(), $from, $to);
 
         foreach ($dataPoints as $dataPoint) {
