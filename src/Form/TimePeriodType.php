@@ -31,11 +31,13 @@ class TimePeriodType extends AbstractType
                 'required' => true,
                 'label' => 'time_period.period_start',
                 'widget' => 'single_text',
+                'input' => 'datetime_immutable',
             ])
             ->add('periodEnd', DateType::class, [
                 'required' => true,
                 'label' => 'time_period.period_end',
                 'widget' => 'single_text',
+                'input' => 'datetime_immutable',
 
                 'constraints' => [
                     new Callback(function ($object, ExecutionContextInterface $context) {
