@@ -3,6 +3,7 @@ framework:
         failure_transport: failed
 
         transports:
+            sync: 'sync://'
             async:
                 dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
                 retry_strategy:
@@ -12,7 +13,7 @@ framework:
                 dsn: 'doctrine://default?queue_name=failed'
 
         routing:
-            'App\Messenger\Message\ImportDataMessage': async
+            'App\Messenger\Message\ImportDataMessage': sync
 
 when@dev:
     framework:
