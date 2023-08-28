@@ -83,5 +83,5 @@ imprint:
 
     list:
         entry_1: 'Verantwortung: Zebrina'
-        entry_2: 'Umsetzung: <a class="text-indigo-600" href="https://1up.io" target="_blank" rel="noopener noreferrer">1up GmbH</a>'
+        entry_2: 'Umsetzung: <a class="text-indigo-600" href="https://1up.io" target="_blank" rel="noopener noreferrer">1up AG</a>'
         entry_3: '<a class="text-indigo-600" href="https://github.com/KriensStadt/zebrina-frontend" target="_blank" rel="noopener noreferrer">Source-Code</a>'
