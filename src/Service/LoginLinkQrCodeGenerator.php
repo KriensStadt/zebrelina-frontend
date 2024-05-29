@@ -13,7 +13,7 @@ use Endroid\QrCode\Writer\PngWriter;
 
 class LoginLinkQrCodeGenerator
 {
-    public function generate(string $url, ?string $password): string
+    public function generate(string $url, ?string $password, ?string $deviceName = null): string
     {
         $builder = Builder::create()
             ->writer(new PngWriter())
@@ -27,9 +27,19 @@ class LoginLinkQrCodeGenerator
             ->validateResult(false)
         ;
 
+        $labelParts = [];
+
+        if (null !== $deviceName) {
+            $labelParts[] = $deviceName;
+        }
+
         if (null !== $password) {
+            $labelParts[] = $password;
+        }
+
+        if (count($labelParts) > 0) {
             $builder
-                ->labelText($password)
+                ->labelText(implode(' / ', $labelParts))
                 ->labelAlignment(new LabelAlignmentCenter())
             ;
         }
