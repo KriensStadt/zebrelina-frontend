@@ -26,12 +26,11 @@ class ApprovalRepository extends ServiceEntityRepository
     /**
      * @return array<Approval>
      */
-    public function findApprovedByActiveTimePeriods(\DateTimeInterface $date): array
+    public function findByActiveTimePeriods(\DateTimeInterface $date): array
     {
         return $this->createQueryBuilder('a')
             ->leftJoin('a.timePeriod', 't')
 
-            ->andWhere('a.approved = true')
             ->andWhere('t.active = true')
             ->andWhere('t.periodStart < :date')
             ->andWhere('t.periodEnd > :date')

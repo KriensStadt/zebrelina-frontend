@@ -28,7 +28,7 @@ class AutoImportTimePeriodsData extends Command
         $io = new SymfonyStyle($input, $output);
         $now = new \DateTimeImmutable('now', new \DateTimeZone('Europe/Zurich'));
 
-        $approvals = $this->approvalRepository->findApprovedByActiveTimePeriods($now);
+        $approvals = $this->approvalRepository->findByActiveTimePeriods($now);
 
         foreach ($approvals as $approval) {
             $this->messageBus->dispatch(new ImportDataMessage($approval));
