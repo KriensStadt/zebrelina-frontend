@@ -55,9 +55,22 @@ class ImportDataMessageHandler
             return;
         }
 
-        $dataPoints = $this->dataImporter->import((string) $device->getName(), $from, $to);
+        $dayRanges = $this->getRangesForDays($from, $to);
+        $allDataPoints = [];
 
-        foreach ($dataPoints as $dataPoint) {
+        foreach ($dayRanges as $range) {
+            [$start, $end] = $range;
+
+            if (false === $start || false === $end) {
+                continue;
+            }
+
+            $dataPoints = $this->dataImporter->import((string) $device->getName(), $start, $end);
+
+            $allDataPoints = [...$allDataPoints, ...$dataPoints];
+        }
+
+        foreach ($allDataPoints as $dataPoint) {
             $metric = new Metric();
             $metric->setPoint(sprintf('POINT(%s %s)', $dataPoint->getLongitude(), $dataPoint->getLatitude()));
             $metric->setCreated($dataPoint->getCreated());
@@ -71,5 +84,56 @@ class ImportDataMessageHandler
 
         $this->entityManager->persist($approval);
         $this->entityManager->flush();
+    }
+
+    private function getRangesForDays(\DateTimeInterface $from, \DateTimeInterface $to): array
+    {
+        $interval = new \DateInterval('P1D');
+        /** @var \DateTime $end */
+        $end = \DateTime::createFromFormat('Y-m-d', $to->format('Y-m-d'));
+        $period = new \DatePeriod($from, $interval, $end->modify('+1 day'));
+
+        $days = [];
+        foreach ($period as $date) {
+            $days[] = $date;
+        }
+
+        $ranges = [];
+
+        foreach ($days as $day) {
+            $dayOfWeek = $day->format('w');
+
+            // do not include weekends
+            if ($dayOfWeek === '0' || $dayOfWeek === '6') {
+                continue;
+            }
+
+            // wednesday
+            if ($dayOfWeek === '3') {
+                $ranges[] = $this->getRange($day, '07:30', '08:30');
+                $ranges[] = $this->getRange($day, '11:30', '12:30');
+                continue;
+            }
+
+            $ranges[] = $this->getRange($day, '07:30', '08:30');
+            $ranges[] = $this->getRange($day, '11:30', '14:15');
+            $ranges[] = $this->getRange($day, '14:45', '16:45');
+        }
+
+        return $ranges;
+    }
+
+    private function getRange(\DateTimeInterface $day, string $timeStart, string $timeEnd): array
+    {
+        return [
+            \DateTimeImmutable::createFromFormat('d-m-Y H:i', sprintf('%s %s',
+                $day->format('Y-m-d'),
+                $timeStart
+            )),
+            \DateTimeImmutable::createFromFormat('d-m-Y H:i', sprintf('%s %s',
+                $day->format('Y-m-d'),
+                $timeEnd
+            ))
+        ];
     }
 }

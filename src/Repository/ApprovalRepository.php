@@ -23,6 +23,26 @@ class ApprovalRepository extends ServiceEntityRepository
         parent::__construct($registry, Approval::class);
     }
 
+    /**
+     * @return array<Approval>
+     */
+    public function findApprovedByActiveTimePeriods(\DateTimeInterface $date): array
+    {
+        return $this->createQueryBuilder('a')
+            ->leftJoin('a.timePeriod', 't')
+
+            ->andWhere('a.approved = true')
+            ->andWhere('t.active = true')
+            ->andWhere('t.periodStart < :date')
+            ->andWhere('t.periodEnd > :date')
+
+            ->setParameter('date', $date)
+
+            ->getQuery()
+            ->execute()
+            ;
+    }
+
     public function findOneByDeviceAndTimePeriod(Device $device, TimePeriod $timePeriod): Approval
     {
         $existing = $this->createQueryBuilder('a')
