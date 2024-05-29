@@ -23,6 +23,25 @@ class ApprovalRepository extends ServiceEntityRepository
         parent::__construct($registry, Approval::class);
     }
 
+    /**
+     * @return array<Approval>
+     */
+    public function findAutoDeletable(\DateTimeInterface $date): array
+    {
+        return $this->createQueryBuilder('a')
+            ->leftJoin('a.timePeriod', 't')
+
+            ->andWhere('t.active = false')
+            ->andWhere('t.periodEnd < :date')
+            ->andWhere('a.approved = false')
+
+            ->setParameter('date', $date)
+
+            ->getQuery()
+            ->execute()
+        ;
+    }
+
     public function findOneByDeviceAndTimePeriod(Device $device, TimePeriod $timePeriod): Approval
     {
         $existing = $this->createQueryBuilder('a')
