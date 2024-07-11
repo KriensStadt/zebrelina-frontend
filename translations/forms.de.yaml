@@ -34,7 +34,7 @@ device_group:
     devices_help: 'Add at least one device to this group'
 
 time_period:
-    name: 'Name'
+    name: 'Code'
     period_start: 'From'
     period_end: 'To'
     active: 'Active'
