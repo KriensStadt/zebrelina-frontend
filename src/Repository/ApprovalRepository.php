@@ -26,6 +26,25 @@ class ApprovalRepository extends ServiceEntityRepository
     /**
      * @return array<Approval>
      */
+    public function findAutoDeletable(\DateTimeInterface $date): array
+    {
+        return $this->createQueryBuilder('a')
+            ->leftJoin('a.timePeriod', 't')
+
+            ->andWhere('t.active = false')
+            ->andWhere('t.periodEnd < :date')
+            ->andWhere('a.approved = false')
+
+            ->setParameter('date', $date)
+
+            ->getQuery()
+            ->execute()
+        ;
+    }
+
+    /**
+     * @return array<Approval>
+     */
     public function findByActiveTimePeriods(\DateTimeInterface $date): array
     {
         return $this->createQueryBuilder('a')
