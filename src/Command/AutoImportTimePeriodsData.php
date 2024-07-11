@@ -4,20 +4,21 @@ declare(strict_types=1);
 
 namespace App\Command;
 
-use App\Repository\TimePeriodRepository;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Messenger\Message\ImportDataMessage;
+use App\Repository\ApprovalRepository;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Messenger\MessageBusInterface;
 
-#[AsCommand(name: 'zebrelina:auto-close-time-periods')]
-class AutoCloseTimePeriods extends Command
+#[AsCommand(name: 'zebrelina:auto-import-time-periods-data')]
+class AutoImportTimePeriodsData extends Command
 {
     public function __construct(
-        private readonly TimePeriodRepository $timePeriodRepository,
-        private readonly EntityManagerInterface $entityManager,
+        private readonly ApprovalRepository $approvalRepository,
+        private readonly MessageBusInterface $messageBus,
     ) {
         parent::__construct(null);
     }
@@ -27,17 +28,13 @@ class AutoCloseTimePeriods extends Command
         $io = new SymfonyStyle($input, $output);
         $now = new \DateTimeImmutable('now', new \DateTimeZone('Europe/Zurich'));
 
-        $timePeriods = $this->timePeriodRepository->findAutoClosable($now);
+        $approvals = $this->approvalRepository->findByActiveTimePeriods($now);
 
-        foreach ($timePeriods as $timePeriod) {
-            $timePeriod->setActive(false);
-
-            $this->entityManager->persist($timePeriod);
+        foreach ($approvals as $approval) {
+            $this->messageBus->dispatch(new ImportDataMessage($approval));
         }
 
-        $this->entityManager->flush();
-
-        $io->success(sprintf('Closed %d time periods', \count($timePeriods)));
+        $io->success(sprintf('Dispatched Import Message for %d approvals', \count($approvals)));
 
         return Command::SUCCESS;
     }
