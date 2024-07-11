@@ -6,7 +6,7 @@ global:
     logout: 'Logout'
 
 index:
-    title: 'Zebrina 🦓'
+    title: 'Zebrelina 🦓'
     goto_admin: 'Administration'
     goto_device: 'Device'
     goto_group: 'Group'
@@ -40,18 +40,18 @@ security:
     error: 'An error occured'
 
     login_admin:
-        title: 'Zebrina Admin 🦓 (de)'
+        title: 'Zebrelina Admin 🦓 (de)'
         subtitle: 'Login to your admin account'
         remember: 'Remember me'
         submit: 'Login'
 
     login_device:
-        title: 'Zebrina 🦓 (de)'
+        title: 'Zebrelina 🦓 (de)'
         subtitle: 'Login to your device'
         submit: 'Login'
 
     login_group:
-        title: 'Zebrina Groups 🦓 (de)'
+        title: 'Zebrelina Groups 🦓 (de)'
         subtitle: 'Login to your group'
         submit: 'Login'
 
@@ -78,10 +78,10 @@ imprint:
     link: 'Impressum'
     title: 'Impressum'
     intro: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-    address: '<strong>Zebrina ...</strong><br>Beispielstrasse 123<br>6010 Luzern'
+    address: '<strong>Zebrelina ...</strong><br>Beispielstrasse 123<br>6010 Luzern'
     license_title: 'Lizenz'
 
     list:
-        entry_1: 'Verantwortung: Zebrina'
+        entry_1: 'Verantwortung: Zebrelina'
         entry_2: 'Umsetzung: <a class="text-indigo-600" href="https://1up.io" target="_blank" rel="noopener noreferrer">1up AG</a>'
         entry_3: '<a class="text-indigo-600" href="https://github.com/KriensStadt/zebrina-frontend" target="_blank" rel="noopener noreferrer">Source-Code</a>'

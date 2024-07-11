@@ -155,18 +155,6 @@
             if (bounds.length > 0) {
                 map.fitBounds(bounds);
             }
-
-            const customAttributionMarkers = [];
-            map.on('click', (event) => {
-                customAttributionMarkers.forEach((existingMarker) => {
-                    map.removeLayer(existingMarker);
-                })
-
-                const marker = L.marker(event.latlng,  {icon: violetIcon});
-                marker.addTo(map).bindPopup(document.getElementById('add-comment').innerHTML.replace('LAT', event.latlng.lat).replace('LNG', event.latlng.lng)).openPopup();
-
-                customAttributionMarkers.push(marker);
-            });
         })();
     </script>
 
@@ -175,10 +163,6 @@
             color: white;
         }
     </style>
-
-    <template id="add-comment">
-        {{ component('button', {type: 'primary', label: 'group.index.add_comment'|trans, href: path('group.add_comment', {lat: 'LAT', lng: 'LNG', date: date})}) }}
-    </template>
 
     {{ parent() }}
 {% endblock %}
