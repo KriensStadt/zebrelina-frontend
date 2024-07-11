@@ -41,7 +41,7 @@ class QrCodeWizard extends AbstractController
             $timePeriod = $form->get('timePeriod')->getData();
 
             $url = $this->router->generate('device.login', parameters: ['device' => $device->getId(), 'timePeriod' => $timePeriod->getId()], referenceType: UrlGeneratorInterface::ABSOLUTE_URL);
-            $qrCode = $this->loginLinkQrCodeGenerator->generate($url, $password);
+            $qrCode = $this->loginLinkQrCodeGenerator->generate($url, $password, $device->getName());
         }
 
         return $this->render('admin/device/qr_code_wizard.html.twig', [
