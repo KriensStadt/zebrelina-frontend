@@ -6,7 +6,7 @@ global:
     logout: 'Logout'
 
 index:
-    title: 'Zebrina 🦓'
+    title: 'Zebrelina 🦓'
     goto_admin: 'Administration'
     goto_device: 'Device'
     goto_group: 'Group'
@@ -40,18 +40,18 @@ security:
     error: 'An error occured'
 
     login_admin:
-        title: 'Zebrina Admin 🦓 (en)'
+        title: 'Zebrelina Admin 🦓'
         subtitle: 'Login to your admin account'
         remember: 'Remember me'
         submit: 'Login'
 
     login_device:
-        title: 'Zebrina 🦓 (en)'
+        title: 'Zebrelina 🦓'
         subtitle: 'Login to your device'
         submit: 'Login'
 
     login_group:
-        title: 'Zebrina Groups 🦓 (en)'
+        title: 'Zebrelina Groups 🦓'
         subtitle: 'Login to your group'
         submit: 'Login'
 

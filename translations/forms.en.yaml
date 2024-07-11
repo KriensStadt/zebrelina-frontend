@@ -5,12 +5,12 @@ login_admin:
 device_login:
     username: 'Device Name'
     password: 'Password'
-    time_period: 'Time period'
+    time_period: 'Time period code'
 
 group_login:
     username: 'Group Name'
     password: 'Password'
-    time_period: 'Time period'
+    time_period: 'Time period code'
 
 admin:
     username: 'Username'
