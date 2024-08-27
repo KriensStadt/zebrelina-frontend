@@ -34,11 +34,11 @@ class Comment
     #[ORM\JoinColumn(nullable: true)]
     private ?Approval $approval = null;
 
-    #[ORM\ManyToOne(targetEntity: DeviceGroup::class, cascade: ['persist'])]
+    #[ORM\ManyToOne(targetEntity: DeviceGroup::class, cascade: ['persist'], inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: true)]
     private ?DeviceGroup $deviceGroup = null;
 
-    #[ORM\ManyToOne(targetEntity: TimePeriod::class, cascade: ['persist'])]
+    #[ORM\ManyToOne(targetEntity: TimePeriod::class, cascade: ['persist'], inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: true)]
     private ?TimePeriod $timePeriod = null;
 

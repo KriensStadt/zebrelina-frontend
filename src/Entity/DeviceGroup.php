@@ -38,13 +38,17 @@ class DeviceGroup implements UserInterface, PasswordAuthenticatedUserInterface, 
     private ?string $password = null;
 
     #[Assert\Count(min: 1)]
-    #[ORM\ManyToMany(targetEntity: Device::class, inversedBy: 'deviceGroups', cascade: ['persist'])]
+    #[ORM\ManyToMany(targetEntity: Device::class, inversedBy: 'deviceGroups', cascade: ['persist', 'remove'])]
     #[ORM\JoinTable(name: 'map_device_group_device')]
     private Collection $devices;
+
+    #[ORM\OneToMany(mappedBy: 'deviceGroup', targetEntity: Comment::class, cascade: ['remove'])]
+    private Collection $comments;
 
     public function __construct()
     {
         $this->devices = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getName(): ?string
@@ -121,5 +125,26 @@ class DeviceGroup implements UserInterface, PasswordAuthenticatedUserInterface, 
 
     public function eraseCredentials(): void
     {
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        $this->comments->removeElement($comment);
+
+        return $this;
+    }
+
+    public function getComments(): Collection
+    {
+        return $this->comments;
     }
 }
