@@ -22,7 +22,7 @@ class Approval
     use CreatedAt;
     use UpdatedAt;
 
-    #[ORM\ManyToOne(targetEntity: TimePeriod::class)]
+    #[ORM\ManyToOne(targetEntity: TimePeriod::class, inversedBy: 'approvals')]
     #[ORM\JoinColumn(nullable: false)]
     private ?TimePeriod $timePeriod = null;
 

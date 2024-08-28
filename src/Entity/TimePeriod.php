@@ -8,6 +8,8 @@ use App\Database\Field\CreatedAt;
 use App\Database\Field\Id;
 use App\Database\Field\UpdatedAt;
 use App\Repository\TimePeriodRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -35,6 +37,18 @@ class TimePeriod
 
     #[ORM\Column(type: Types::BOOLEAN)]
     private bool $autoClose = true;
+
+    #[ORM\OneToMany(mappedBy: 'timePeriod', targetEntity: Comment::class, cascade: ['remove'])]
+    private Collection $comments;
+
+    #[ORM\OneToMany(mappedBy: 'timePeriod', targetEntity: Approval::class, cascade: ['remove'])]
+    private Collection $approvals;
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+        $this->approvals = new ArrayCollection();
+    }
 
     public function getName(): ?string
     {
@@ -94,5 +108,47 @@ class TimePeriod
         $this->autoClose = $autoClose;
 
         return $this;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        $this->comments->removeElement($comment);
+
+        return $this;
+    }
+
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addApproval(Approval $approval): self
+    {
+        if (!$this->approvals->contains($approval)) {
+            $this->approvals->add($approval);
+        }
+
+        return $this;
+    }
+
+    public function removeApproval(Approval $approval): self
+    {
+        $this->approvals->removeElement($approval);
+
+        return $this;
+    }
+
+    public function getApprovals(): Collection
+    {
+        return $this->approvals;
     }
 }
