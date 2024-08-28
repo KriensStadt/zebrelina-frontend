@@ -30,16 +30,16 @@ class TestDatabaseConnection extends Command
             $this->defaultConnection->executeQuery('SELECT 1');
 
             $io->success('Successfully connected to "default" dbal connection');
-        } catch (Exception) {
-            $io->error('Connecting to "default" dbal connection failed');
+        } catch (Exception $e) {
+            $io->error('Connecting to "default" dbal connection failed: ' . $e->getMessage());
         }
 
         try {
             $this->remoteConnection->executeQuery('SELECT 1');
 
             $io->success('Successfully connected to "remote" dbal connection');
-        } catch (Exception) {
-            $io->error('Connecting to "remote" dbal connection failed');
+        } catch (Exception $e) {
+            $io->error('Connecting to "remote" dbal connection failed: ' . $e->getMessage());
         }
 
         return Command::SUCCESS;
