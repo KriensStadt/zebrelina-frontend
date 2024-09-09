@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Controller\Admin\Device;
 
 use App\Entity\Device;
-use App\Entity\TimePeriod;
 use App\Form\DeviceQrCodeWizardType;
 use App\Service\LoginLinkQrCodeGenerator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -37,10 +36,7 @@ class QrCodeWizard extends AbstractController
             /** @var Device $device */
             $device = $form->get('device')->getData();
 
-            /** @var TimePeriod $timePeriod */
-            $timePeriod = $form->get('timePeriod')->getData();
-
-            $url = $this->router->generate('device.login', parameters: ['device' => $device->getId(), 'timePeriod' => $timePeriod->getId()], referenceType: UrlGeneratorInterface::ABSOLUTE_URL);
+            $url = $this->router->generate('device.login', parameters: ['device' => $device->getId()], referenceType: UrlGeneratorInterface::ABSOLUTE_URL);
             $qrCode = $this->loginLinkQrCodeGenerator->generate($url, $password, $device->getName());
         }
 
