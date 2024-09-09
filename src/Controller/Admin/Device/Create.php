@@ -6,6 +6,7 @@ namespace App\Controller\Admin\Device;
 
 use App\Entity\Device;
 use App\Form\DeviceType;
+use App\Service\AutoApprover;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,6 +26,7 @@ class Create extends AbstractController
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
         private readonly UserPasswordHasherInterface $passwordHasher,
+        private readonly AutoApprover $approver,
     ) {
     }
 
@@ -40,6 +42,8 @@ class Create extends AbstractController
             $password = $form->get('password')->getData();
 
             $device->setPassword($this->passwordHasher->hashPassword($device, $password));
+
+            $this->approver->createApprovalsForDevice($device);
 
             $this->entityManager->persist($device);
             $this->entityManager->flush();
