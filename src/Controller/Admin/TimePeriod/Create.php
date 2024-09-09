@@ -6,6 +6,7 @@ namespace App\Controller\Admin\TimePeriod;
 
 use App\Entity\TimePeriod;
 use App\Form\TimePeriodType;
+use App\Service\AutoApprover;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,6 +24,7 @@ class Create extends AbstractController
 {
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
+        private readonly AutoApprover $approver,
     ) {
     }
 
@@ -35,6 +37,9 @@ class Create extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->entityManager->persist($timePeriod);
+
+            $this->approver->createApprovalsForTimePeriod($timePeriod);
+
             $this->entityManager->flush();
 
             $this->addFlash('success', 'Created time period');
