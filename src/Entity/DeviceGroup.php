@@ -38,7 +38,7 @@ class DeviceGroup implements UserInterface, PasswordAuthenticatedUserInterface, 
     private ?string $password = null;
 
     #[Assert\Count(min: 1)]
-    #[ORM\ManyToMany(targetEntity: Device::class, inversedBy: 'deviceGroups', cascade: ['persist', 'remove'])]
+    #[ORM\ManyToMany(targetEntity: Device::class, inversedBy: 'deviceGroups', cascade: ['persist'])]
     #[ORM\JoinTable(name: 'map_device_group_device')]
     private Collection $devices;
 
