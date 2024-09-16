@@ -30,17 +30,18 @@
 
         <div class="mb-3">
             <label for="inputPassword" class="form-label">{{ 'device_login.password'|trans({}, 'forms') }}<span class="text-red-500">*</span></label>
-            <input type="password" name="_password" id="inputPassword" class="form-input" placeholder="{{ 'device_login.password'|trans({}, 'forms') }}" required>
+
+            {% if password %}
+                <input type="password" value="{{ password }}" name="_password" id="inputPassword" class="form-input" placeholder="{{ 'device_login.password'|trans({}, 'forms') }}" required readonly>
+            {% else %}
+                <input type="password" name="_password" id="inputPassword" class="form-input" placeholder="{{ 'device_login.password'|trans({}, 'forms') }}" required>
+            {% endif %}
         </div>
 
         <div class="mb-3">
             <label for="inputTimePeriod" class="form-label">{{ 'device_login.time_period'|trans({}, 'forms') }}<span class="text-red-500">*</span></label>
 
-            {% if timePeriod %}
-                <input type="text" value="{{ timePeriod.name }}" name="_time_period" id="inputTimePeriod" class="form-input" placeholder="{{ 'device_login.time_period'|trans({}, 'forms') }}" required readonly>
-            {% else %}
-                <input type="text" name="_time_period" id="inputTimePeriod" class="form-input" placeholder="{{ 'device_login.time_period'|trans({}, 'forms') }}" required>
-            {% endif %}
+            <input type="text" name="_time_period" id="inputTimePeriod" class="form-input" placeholder="{{ 'device_login.time_period'|trans({}, 'forms') }}" required>
         </div>
 
         {{ component('button', {type: 'primary', label: 'security.login_device.submit'|trans, stretch: true}) }}

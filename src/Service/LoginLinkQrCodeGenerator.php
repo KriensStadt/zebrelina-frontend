@@ -33,10 +33,6 @@ class LoginLinkQrCodeGenerator
             $labelParts[] = $deviceName;
         }
 
-        if (null !== $password) {
-            $labelParts[] = $password;
-        }
-
         if (count($labelParts) > 0) {
             $builder
                 ->labelText(implode(' / ', $labelParts))
