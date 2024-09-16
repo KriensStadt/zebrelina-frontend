@@ -37,7 +37,6 @@ class QrCodeWizard extends AbstractController
             $device = $form->get('device')->getData();
 
             $url = $this->router->generate('device.login', parameters: ['device' => $device->getId(), 'password' => $password], referenceType: UrlGeneratorInterface::ABSOLUTE_URL);
-            dump($url);
             $qrCode = $this->loginLinkQrCodeGenerator->generate($url, $password, $device->getName());
         }
 
