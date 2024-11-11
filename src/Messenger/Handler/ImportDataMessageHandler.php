@@ -126,11 +126,11 @@ class ImportDataMessageHandler
     private function getRange(\DateTimeInterface $day, string $timeStart, string $timeEnd): array
     {
         return [
-            \DateTimeImmutable::createFromFormat('d-m-Y H:i', sprintf('%s %s',
+            \DateTimeImmutable::createFromFormat('Y-m-d H:i', sprintf('%s %s',
                 $day->format('Y-m-d'),
                 $timeStart
             )),
-            \DateTimeImmutable::createFromFormat('d-m-Y H:i', sprintf('%s %s',
+            \DateTimeImmutable::createFromFormat('Y-m-d H:i', sprintf('%s %s',
                 $day->format('Y-m-d'),
                 $timeEnd
             ))
