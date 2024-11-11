@@ -51,14 +51,13 @@ class ApprovalRepository extends ServiceEntityRepository
             ->leftJoin('a.timePeriod', 't')
 
             ->andWhere('t.active = true')
-            ->andWhere('t.periodStart < :date')
-            ->andWhere('t.periodEnd > :date')
+            ->andWhere(':date BETWEEN t.periodStart AND t.periodEnd')
 
             ->setParameter('date', $date)
 
             ->getQuery()
             ->execute()
-            ;
+        ;
     }
 
     public function findOneByDeviceAndTimePeriod(Device $device, TimePeriod $timePeriod): Approval

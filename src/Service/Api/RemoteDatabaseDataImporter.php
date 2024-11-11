@@ -17,8 +17,8 @@ class RemoteDatabaseDataImporter implements DataImporterInterface
 
     public function import(string $deviceName, \DateTimeInterface $from, \DateTimeInterface $to): array
     {
-        $from = \DateTime::createFromInterface($from)->setTimezone(new \DateTimeZone('Europe/Zurich'));
-        $to = \DateTime::createFromInterface($to)->setTimezone(new \DateTimeZone('Europe/Zurich'));
+        //$from = \DateTime::createFromInterface($from)->setTimezone(new \DateTimeZone('Europe/Zurich'));
+        //$to = \DateTime::createFromInterface($to)->setTimezone(new \DateTimeZone('Europe/Zurich'));
 
         $query = $this->remoteConnection->executeQuery('
             SELECT
@@ -33,7 +33,7 @@ class RemoteDatabaseDataImporter implements DataImporterInterface
         ', [
             'device' => $deviceName,
             'from' => $from->format('Y-m-d H:i:s'),
-            'to' => $to->format('Y-m-d 23:59:59'),
+            'to' => $to->format('Y-m-d H:i:s'),
         ]);
 
         return array_map(function (array $result): DataPoint {
