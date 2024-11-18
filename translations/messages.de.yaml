@@ -1,87 +1,87 @@
 global:
-    save: 'Save'
-    back: 'Back'
-    prev: 'Previous'
-    next: 'Next'
+    save: 'Speichern'
+    back: 'Zurück'
+    prev: 'Zurück'
+    next: 'Weiter'
     logout: 'Logout'
 
 index:
     title: 'Zebrelina 🦓'
     goto_admin: 'Administration'
-    goto_device: 'Device'
-    goto_group: 'Group'
+    goto_device: 'Spurensammler'
+    goto_group: 'Gruppe'
 
 device:
     title: '%device%'
-    subtitle: 'Show map of this devices data'
-    go_back: 'Back to Overview'
-    filter: 'Select date'
+    subtitle: 'Zeigt eine Karte mit den Daten der Spurensammler'
+    go_back: 'Zurück zur Übersicht'
+    filter: 'Datum auswählen'
 
     index:
-        approve: 'Approve'
-        filter_by_date: 'Filter by Date'
-        add_comment: 'Add Comment'
+        approve: 'Freigabe'
+        filter_by_date: 'Datumsfilter'
+        add_comment: 'Kommentar hinzufügen'
 
     currently_importing:
-        text: 'This data is currently being imported. Please check back in a few minutes'
+        text: 'Die Daten werden gerade importiert, bitte warte einen Moment'
 
-    last_imported: 'Last import <span class="font-medium">{date}</span>'
+    last_imported: 'Letzter Import: <span class="font-medium">{date}</span>'
 
     approval_info:
-        title: 'Approval needed'
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+        title: 'Freigabe erforderlich'
+        text: 'Damit die Stadt Kriens die gesammelten Spuren auswerten darf, müssen diese freigegeben werden. Mit der Auswertung werden Gefahren- und Schwachstellen wie fehlende Fussgängerstreifen oder Beleuchtungen, unsichere Querungen oder ungenügende Signalisation auf den Krienser Strassen sichtbar. So kann Kriens Schulwege sicherer gestalten.'
 
 group:
     index:
-        filter_by_date: 'Filter by Date'
-        add_comment: 'Add Comment'
+        filter_by_date: 'Datumsfilter'
+        add_comment: 'Kommentar hinzufügen'
 
 security:
-    error: 'An error occured'
+    error: 'Es ist ein Fehler aufgetreten'
 
     login_admin:
-        title: 'Zebrelina Admin 🦓 (de)'
-        subtitle: 'Login to your admin account'
-        remember: 'Remember me'
+        title: 'Zebrelina Administration 🦓'
+        subtitle: 'Einloggen mit Administratoraccount'
+        remember: 'Login speichern'
         submit: 'Login'
 
     login_device:
-        title: 'Zebrelina 🦓 (de)'
-        subtitle: 'Login to your device'
+        title: 'Zebrelina 🦓'
+        subtitle: 'Spurensammler Login'
         submit: 'Login'
 
     login_group:
-        title: 'Zebrelina Groups 🦓 (de)'
-        subtitle: 'Login to your group'
+        title: 'Zebrelina Klasse 🦓'
+        subtitle: 'Klassenlogin'
         submit: 'Login'
 
 admin:
     index:
-        create_admin: 'Create Admin'
+        create_admin: 'Administrator erstellen'
 
     device:
-        create_device: 'Create device'
-        qr_code_wizard: 'Create Login QR Code'
+        create_device: 'Spurensammler erstellen'
+        qr_code_wizard: 'QR Code erzeugen'
 
     group:
-        create_group: 'Create group'
-        number_of_devices: '{number} devices'
-        qr_code_wizard: 'Create Login QR Code'
+        create_group: 'Gruppe/Klasse erstellen'
+        number_of_devices: '{number} Spurensammler'
+        qr_code_wizard: 'QR Code erzeigen'
 
     time_period:
-        create_time_period: 'Create time period'
+        create_time_period: 'Zeitperiode erstellen'
 
     comment_type:
-        create_comment_type: 'Create comment type'
+        create_comment_type: 'Kommentartyp erstellen'
 
 imprint:
     link: 'Impressum'
     title: 'Impressum'
-    intro: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-    address: '<strong>Zebrelina ...</strong><br>Beispielstrasse 123<br>6010 Luzern'
+    intro: 'Projekt zur Erfassung der Schulwegsicherheit in der Stadt Kriens.'
+    address: '<strong>Projekt Zebrelina</strong><br>Stadt Kriens<br>Maurus Frey<br>Stadtplatz 1<br>6010 Kriens'
     license_title: 'Lizenz'
 
     list:
-        entry_1: 'Verantwortung: Zebrelina'
+        entry_1: 'Verantwortung: Maurus Frey, Stadt Kriens'
         entry_2: 'Umsetzung: <a class="text-indigo-600" href="https://1up.io" target="_blank" rel="noopener noreferrer">1up AG</a>'
         entry_3: '<a class="text-indigo-600" href="https://github.com/KriensStadt/zebrina-frontend" target="_blank" rel="noopener noreferrer">Source-Code</a>'

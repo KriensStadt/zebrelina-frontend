@@ -1,7 +1,7 @@
 admin:
     index: 'Dashboard'
     admin: 'Admins'
-    device: 'Devices'
-    group: 'Groups'
-    time_period: 'Time Periods'
-    comment_type: 'Comment Types'
+    device: 'Spurensammler'
+    group: 'Gruppen'
+    time_period: 'Zeitperiode'
+    comment_type: 'Kommentartypen'
