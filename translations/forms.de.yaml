@@ -1,45 +1,45 @@
 login_admin:
-    username: 'Username'
-    password: 'Password'
+    username: 'Benutzername'
+    password: 'Passwort'
 
 device_login:
-    username: 'Device Name'
-    password: 'Password'
-    time_period: 'Time period'
+    username: 'Spurensammlername'
+    password: 'Spurensammlerpasswort'
+    time_period: 'Klassencode'
 
 group_login:
-    username: 'Group Name'
-    password: 'Password'
-    time_period: 'Time period'
+    username: 'Gruppenname'
+    password: 'Gruppenpasswort'
+    time_period: 'Klassencode'
 
 admin:
-    username: 'Username'
-    password: 'Password'
-    repeat_password: 'Repeat password'
+    username: 'Benutzername'
+    password: 'Passwort'
+    repeat_password: 'Passwort wiederholen'
 
 device:
-    name: 'Name'
-    password: 'Password'
-    repeat_password: 'Repeat password'
+    name: 'Spurensammlername'
+    password: 'Spurensammlerpasswort'
+    repeat_password: 'Passwort wiederholen'
 
 approval:
-    approved: 'Approve this data to be imported'
-    approved_help: 'A very nice help message for this field describing the import approval for this time period'
+    approved: 'Daten freigeben'
+    approved_help: 'Durch die Freigabe der Daten dürfen diese von der Stadt Kriens zur Verbesserung der Schulweg-Sicherheit verwendet werden.'
 
 device_group:
-    name: 'Name'
-    password: 'Password'
-    repeat_password: 'Repeat password'
-    devices: 'Devices'
-    devices_help: 'Add at least one device to this group'
+    name: 'Gruppenname'
+    password: 'Gruppenpasswort'
+    repeat_password: 'Passwort wiederholen'
+    devices: 'Spurensammler'
+    devices_help: 'Mindestens ein Spurensammler muss Teil dieser Gruppe sein.'
 
 time_period:
-    name: 'Code'
-    period_start: 'From'
-    period_end: 'To'
-    active: 'Active'
-    auto_close: 'Auto Close'
-    auto_close_help: 'Automatically disable this time period when the period ends'
+    name: 'Klassencode'
+    period_start: 'Von'
+    period_end: 'Bis'
+    active: 'Aktiv'
+    auto_close: 'Automatisch schliessen'
+    auto_close_help: 'Deaktiviert diese Zeitperiode automatisch, sobald diese abläuft.'
 
 comment:
     content: 'Content'
@@ -53,11 +53,11 @@ comment_type:
 device_qr_code:
     device: 'Device'
     time_period: 'Time Period'
-    password: 'Password'
-    password_help: 'Will be printed as a label on the resulting QR Code'
+    password: 'Gerätepasswort'
+    password_help: 'Das Gerätepasswort wird im generierten QR-Code enthalten sein.'
 
 group_qr_code:
-    device: 'Device Group'
-    time_period: 'Time Period'
+    device: 'Gruppenname'
+    time_period: 'Klassencode'
     password: 'Password'
-    password_help: 'Will be printed as a label on the resulting QR Code'
+    password_help: 'Das Passwort wird im generierten QR-Code enthalten sein.'
