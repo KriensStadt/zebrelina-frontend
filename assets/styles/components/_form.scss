@@ -4,7 +4,7 @@
     }
 
     .form-input {
-        @apply block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm;
+        @apply block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-zebrelina-dark-blue focus:outline-none focus:ring-zebrelina-dark-blue sm:text-sm;
     }
 
     .form-input[readonly] {
@@ -12,7 +12,7 @@
     }
 
     .form-checkbox {
-        @apply h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 mr-2;
+        @apply h-4 w-4 rounded border-gray-300 text-zebrelina-dark-blue focus:ring-zebrelina-dark-blue mr-2;
     }
 
     .form-checkbox + .form-label {
@@ -20,6 +20,6 @@
     }
 
     .form-radio {
-        @apply h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500;
+        @apply h-4 w-4 border-gray-300 text-zebrelina-dark-blue focus:ring-zebrelina-dark-blue;
     }
 }
