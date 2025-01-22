@@ -42,10 +42,10 @@ time_period:
     auto_close_help: 'Deaktiviert diese Zeitperiode automatisch, sobald diese abläuft.'
 
 comment:
-    content: 'Content'
-    content_help: 'Add a beautiful description how to best use this field'
-    comment_type: 'Type'
-    comment_type_help: 'Type help'
+    content: 'Kommentar'
+    content_help: 'Weitere Anmerkungen zu diesem Kommentar'
+    comment_type: 'Kategorie'
+    comment_type_help: 'In welche Kategorie fällt dieser Kommentar?'
 
 comment_type:
     name: 'Name'

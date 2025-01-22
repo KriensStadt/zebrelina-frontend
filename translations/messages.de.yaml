@@ -6,7 +6,7 @@ global:
     logout: 'Logout'
 
 index:
-    title: 'Zebrelina 🦓'
+    title: 'Zebrelina'
     goto_admin: 'Administration'
     goto_device: 'Spurensammler'
     goto_group: 'Gruppe'
@@ -40,18 +40,18 @@ security:
     error: 'Es ist ein Fehler aufgetreten'
 
     login_admin:
-        title: 'Zebrelina Administration 🦓'
+        title: 'Zebrelina Administration'
         subtitle: 'Einloggen mit Administratoraccount'
         remember: 'Login speichern'
         submit: 'Login'
 
     login_device:
-        title: 'Zebrelina 🦓'
+        title: 'Zebrelina'
         subtitle: 'Spurensammler Login'
         submit: 'Login'
 
     login_group:
-        title: 'Zebrelina Klasse 🦓'
+        title: 'Zebrelina Klasse'
         subtitle: 'Klassenlogin'
         submit: 'Login'
 
@@ -83,5 +83,5 @@ imprint:
 
     list:
         entry_1: 'Verantwortung: Maurus Frey, Stadt Kriens'
-        entry_2: 'Umsetzung: <a class="text-indigo-600" href="https://1up.io" target="_blank" rel="noopener noreferrer">1up AG</a>'
-        entry_3: '<a class="text-indigo-600" href="https://github.com/KriensStadt/zebrina-frontend" target="_blank" rel="noopener noreferrer">Source-Code</a>'
+        entry_2: 'Umsetzung: <a class="text-zebrelina-dark-blue" href="https://1up.io" target="_blank" rel="noopener noreferrer">1up AG</a>'
+        entry_3: '<a class="text-zebrelina-dark-blue" href="https://github.com/KriensStadt/zebrina-frontend" target="_blank" rel="noopener noreferrer">Source-Code</a>'

@@ -6,7 +6,7 @@ global:
     logout: 'Logout'
 
 index:
-    title: 'Zebrelina 🦓'
+    title: 'Zebrelina'
     goto_admin: 'Administration'
     goto_device: 'Device'
     goto_group: 'Group'
@@ -40,18 +40,18 @@ security:
     error: 'An error occured'
 
     login_admin:
-        title: 'Zebrelina Admin 🦓 (en)'
+        title: 'Zebrelina Admin (en)'
         subtitle: 'Login to your admin account'
         remember: 'Remember me'
         submit: 'Login'
 
     login_device:
-        title: 'Zebrelina 🦓 (en)'
+        title: 'Zebrelina (en)'
         subtitle: 'Login to your device'
         submit: 'Login'
 
     login_group:
-        title: 'Zebrelina Groups 🦓 (en)'
+        title: 'Zebrelina Groups (en)'
         subtitle: 'Login to your group'
         submit: 'Login'
 
@@ -83,5 +83,5 @@ imprint:
 
     list:
         entry_1: 'Verantwortung: Zebrelina'
-        entry_2: 'Umsetzung: <a class="text-indigo-600" href="https://1up.io" target="_blank" rel="noopener noreferrer">1up AG</a>'
-        entry_3: '<a class="text-indigo-600" href="https://github.com/KriensStadt/zebrina-frontend" target="_blank" rel="noopener noreferrer">Source-Code</a>'
+        entry_2: 'Umsetzung: <a class="text-zebrelina-dark-blue" href="https://1up.io" target="_blank" rel="noopener noreferrer">1up AG</a>'
+        entry_3: '<a class="text-zebrelina-dark-blue" href="https://github.com/KriensStadt/zebrina-frontend" target="_blank" rel="noopener noreferrer">Source-Code</a>'
