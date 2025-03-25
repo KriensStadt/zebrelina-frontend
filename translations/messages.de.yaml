@@ -1,5 +1,6 @@
 global:
     save: 'Speichern'
+    export: 'Exportieren'
     back: 'Zurück'
     prev: 'Zurück'
     next: 'Weiter'
