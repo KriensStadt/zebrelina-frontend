@@ -5,6 +5,11 @@
 
 {% block buttons %}
     {{ component('back_link', {href: path('admin.time_period.index')}) }}
+    {% if showExport %}
+        <a href="{{ path('admin.time_period.export', {'timePeriod': timePeriod.id}) }}" target="_blank">
+            {{ component('button', {type: 'primary', label: 'global.export'|trans}) }}
+        </a>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
