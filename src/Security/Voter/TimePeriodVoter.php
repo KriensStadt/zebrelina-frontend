@@ -29,7 +29,7 @@ class TimePeriodVoter extends Voter
     {
         /** @var TimePeriod $timePeriod */
         $timePeriod = $subject;
-        
+
         return match ($attribute) {
             self::CAN_EXPORT => $this->canExport($timePeriod),
 
