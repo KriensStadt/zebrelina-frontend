@@ -31,8 +31,6 @@ class Edit extends AbstractController
         $form = $this->createForm(TimePeriodType::class, $timePeriod);
         $form->handleRequest($request);
 
-        $showExport = $timePeriod->getPeriodEnd() < new \DateTime() && !$timePeriod->isActive();
-
         if ($form->isSubmitted() && $form->isValid()) {
             $this->entityManager->persist($timePeriod);
             $this->entityManager->flush();
@@ -45,7 +43,6 @@ class Edit extends AbstractController
         return $this->render('admin/time_period/edit.html.twig', [
             'form' => $form,
             'timePeriod' => $timePeriod,
-            'showExport' => $showExport,
         ]);
     }
 }
