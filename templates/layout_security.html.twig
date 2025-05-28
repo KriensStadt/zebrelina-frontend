@@ -3,9 +3,7 @@
 {% block body %}
     <div class="grow flex flex-col items-center justify-center">
         {% block logo %}
-            {% if hasPlatformLogo() %}
-                <img class="h-48" src="{{ asset(getPlatformLogoPath()) }}" alt="Logo">
-            {% endif %}
+            <img class="h-48" src="{{ asset('logo.png') }}" alt="Logo">
         {% endblock %}
         {% block header %}
             <div class="sm:mx-auto sm:w-full sm:max-w-md">

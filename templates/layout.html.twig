@@ -7,11 +7,7 @@
             <div class="flex flex-row items-center">
                 <div class="grow flex flex-row items-center">
                     <a href="{% block logo_link %}{% endblock %}" class="text-3xl mr-4">
-                        {% if not hasPlatformLogo() %}
-                            🦓
-                        {% else %}
-                            <img class="h-10" src="{{ asset(getPlatformLogoPath()) }}" alt="Logo">
-                        {% endif %}
+                        <img class="h-10" src="{{ asset('logo.png') }}" alt="Logo">
                     </a>
 
                     {% block navigation %}{% endblock %}
