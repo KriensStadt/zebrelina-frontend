@@ -32,7 +32,7 @@
             {% endblock %}
 
             {% block card_footer %}
-                {% include 'partials/pagination.html.twig' with {paginator: commentTypes} %}
+                {{ include('partials/pagination.html.twig', {paginator: commentTypes}) }}
             {% endblock %}
         {% endcomponent %}
     {% endif %}

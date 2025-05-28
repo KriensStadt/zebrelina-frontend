@@ -40,7 +40,7 @@
         {% endblock %}
 
         {% block card_footer %}
-            {% include 'partials/pagination.html.twig' with {paginator: timePeriods} %}
+            {{ include('partials/pagination.html.twig', {paginator: timePeriods}) }}
         {% endblock %}
     {% endcomponent %}
 {% endblock %}

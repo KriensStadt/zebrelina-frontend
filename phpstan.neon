@@ -4,12 +4,12 @@ includes:
     - tools/phpstan/vendor/phpstan/phpstan-doctrine/extension.neon
 
 parameters:
-    checkMissingIterableValueType: false
-    checkGenericClassInNonGenericObjectType: false
     symfony:
         container_xml_path: var/cache/dev/App_KernelDevDebugContainer.xml
 
     ignoreErrors:
+        - identifier: missingType.iterableValue
+        - identifier: missingType.generics
         - '#Parameter .* of function array_map#'
         -
             message: '#Method .* should return .* but returns mixed\.#'

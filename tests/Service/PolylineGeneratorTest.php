@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Service;
+namespace App\Tests\Service;
 
 use App\Model\DataPoint;
+use App\Service\PolylineGenerator;
 use PHPUnit\Framework\TestCase;
 
 class PolylineGeneratorTest extends TestCase

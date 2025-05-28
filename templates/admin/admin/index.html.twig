@@ -35,7 +35,7 @@
         {% endblock %}
 
         {% block card_footer %}
-            {% include 'partials/pagination.html.twig' with {paginator: admins} %}
+            {{ include('partials/pagination.html.twig', {paginator: admins}) }}
         {% endblock %}
     {% endcomponent %}
 {% endblock %}

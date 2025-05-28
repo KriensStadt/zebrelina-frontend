@@ -7,7 +7,7 @@
     {{ component('back_link', {href: path('admin.time_period.index')}) }}
 
     {% if is_granted(constant('App\\Security\\Voter\\TimePeriodVoter::CAN_EXPORT'), timePeriod) %}
-        <a href="{{ path('admin.time_period.export', {'timePeriod': timePeriod.id}) }}">
+        <a href="{{ path('admin.time_period.export', {timePeriod: timePeriod.id}) }}">
             {{ component('button', {type: 'primary', label: 'global.export'|trans}) }}
         </a>
     {% endif %}

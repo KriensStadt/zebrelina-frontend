@@ -31,7 +31,7 @@
         {% endblock %}
 
         {% block card_footer %}
-            {% include 'partials/pagination.html.twig' with {paginator: devices} %}
+            {{ include('partials/pagination.html.twig', {paginator: devices}) }}
         {% endblock %}
     {% endcomponent %}
 {% endblock %}

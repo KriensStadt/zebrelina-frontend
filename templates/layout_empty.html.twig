@@ -25,7 +25,7 @@
             <div class="text-center text-xs text-gray-800">
                 <span>&copy; {{ 'today'|date('Y') }} StadtKriens</span> |
                 <a href="{{ path('about') }}">{{ 'imprint.link'|trans }}</a> |
-                {% include 'partials/language_switcher.html.twig' %}
+                {{ include('partials/language_switcher.html.twig') }}
             </div>
         </div>
     </footer>
